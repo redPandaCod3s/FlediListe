@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FlediListe.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FlediListe"
+    xmlns:MVVM="clr-namespace:FlediListe.MVVM.Views"
+    BackgroundColor="#0A0C10"
+    FlyoutBehavior="Disabled"
+    Shell.NavBarIsVisible="False">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate MVVM:MainPage}"
+        Route="MainPage" />
+
+</Shell>
