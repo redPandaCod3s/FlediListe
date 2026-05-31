@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlediListe")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+6ad8d09cac00cc461104405d935f281254b7864d")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlediListe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlediListe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

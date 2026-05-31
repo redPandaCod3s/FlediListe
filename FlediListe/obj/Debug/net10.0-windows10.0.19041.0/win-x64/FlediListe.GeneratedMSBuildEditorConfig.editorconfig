@@ -69,16 +69,6 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
-[C:/Users/vvmai/RiderProjects/FlediListe/FlediListe/MVVM/Views/LocationDetailPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = FlediListe.MVVM.Views.LocationDetailPage.xaml
-build_metadata.AdditionalFiles.TargetPath = MVVM\Views\LocationDetailPage.xaml
-build_metadata.AdditionalFiles.RelativePath = MVVM\Views\LocationDetailPage.xaml
-build_metadata.AdditionalFiles.Inflator = SourceGen
-build_metadata.AdditionalFiles.NoWarn = 
-build_metadata.AdditionalFiles.EnableDiagnostics = 
-build_metadata.AdditionalFiles.LineInfo = 
-
 [C:/Users/vvmai/RiderProjects/FlediListe/FlediListe/MVVM/Views/LocationPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FlediListe.MVVM.Views.LocationPage.xaml

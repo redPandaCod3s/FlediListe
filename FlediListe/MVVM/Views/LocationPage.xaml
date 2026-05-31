@@ -9,18 +9,57 @@
     <Grid RowDefinitions="Auto, Auto, *, Auto">
         <Button Text="zurück zur Startseite"
                 Style="{StaticResource SecondaryButton}"
-                Margin="24,16,24,16"/>
+                Margin="24,16,24,16"
+                Command="{Binding ReturnToMainPage}"/>
+        
         <!-- Header -->
         <VerticalStackLayout Grid.Row="1" Padding="24,48,24,0" Spacing="4">
-            <Label Text="Standorte" Style="{StaticResource HeadingLarge}" />
+            <Label Text="Standorte" 
+                   Style="{StaticResource HeadingLarge}" 
+                   Margin="24,16,24,32"/>
+            
+            <!-- Standort-Liste -->
+            <CollectionView Margin="24,8,24,0"
+                            ItemsSource="{Binding }"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate >
+                        <Border BackgroundColor="{StaticResource BgCard}"
+                                StrokeThickness="1"
+                                Stroke="{StaticResource BorderSubtle}"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="16">
+                            
+                        </Border>
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center"
+                                         Spacing="12" Margin="0,60,0,0">
+                        <Label Text="⚡" FontSize="48" HorizontalOptions="Center"/>
+                        <Label Text="KEINE STANDORTE GEFUNDEN"
+                               Style="{StaticResource MonoLabel}"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Lege einen Standort an."
+                               Style="{StaticResource BodyText}"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+            
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="3">
+            <Entry Style="{StaticResource TechEntry}"
+                   Placeholder="neuen Standort eingeben..."
+                   Margin="24,16,24,32"/>
+        
+            <Button Text="Standort anlegen"
+                    Style="{StaticResource PrimaryButton}"
+                    Margin="24,16,24,32"/>
         </VerticalStackLayout>
         
-        <Button Grid.Row="3"
-                Text="+ neuen Standort"
-                Style="{StaticResource PrimaryButton}"
-                Margin="24,16,24,32"/>
-        
     </Grid>
-    
     
 </ContentPage>

@@ -1,6 +1,6 @@
 namespace FlediListe.MVVM.ViewModels;
 
-public class DatePageViewModel
+public class DatePageViewModel : ViewModelBase
 {
     
 }
