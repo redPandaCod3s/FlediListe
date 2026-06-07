@@ -4,13 +4,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlediListe.MVVM.Views.LocationPage"
              xmlns:viewModels="clr-namespace:FlediListe.MVVM.ViewModels"
+             xmlns:converter="clr-namespace:FlediListe.MVVM.Converter"
              BackgroundColor="{StaticResource BgDeep}">
     
+    <ContentPage.Resources>
+        <converter:InvertedBoolConverter x:Key="InverseBoolConverter"/>
+    </ContentPage.Resources>
+    
     <Grid RowDefinitions="Auto, Auto, *, Auto">
-        <Button Text="zurück zur Startseite"
-                Style="{StaticResource SecondaryButton}"
-                Margin="24,16,24,16"
-                Command="{Binding ReturnToMainPage}"/>
+        <HorizontalStackLayout Spacing="12" HorizontalOptions="Fill">
+            <Button Text="zurück zur Startseite"
+                    Style="{StaticResource SecondaryButton}"
+                    IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
+                    Margin="24,16,24,16"
+                    Command="{Binding ReturnToMainPage}"/>
+            
+            <Button Text="Bearbeiten"
+                    Style="{StaticResource SecondaryButton}"
+                    BorderColor="{StaticResource AccentSkyBlue}"
+                    TextColor="{StaticResource AccentSkyBlue}"
+                    IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
+                    Margin="24,16,24,16"
+                    Command="{Binding SetEditingMode}"/>
+            
+            <Button Text="Bearbeiten beenden"
+                    Style="{StaticResource SecondaryButton}"
+                    IsVisible="{Binding IsEditMode}"
+                    Margin="24,16,24,16"
+                    Command="{Binding SetEditingMode}"/>
+            
+        </HorizontalStackLayout>
         
         <!-- Header -->
         <VerticalStackLayout Grid.Row="1" Padding="24,48,24,0" Spacing="4">
@@ -20,8 +43,10 @@
             
             <!-- Standort-Liste -->
             <CollectionView Margin="24,8,24,0"
-                            ItemsSource="{Binding }"
-                            SelectionMode="None">
+                            ItemsSource="{Binding Locations}"
+                            SelectionMode="Single"
+                            VerticalOptions="Fill"
+                            >
                 <CollectionView.ItemTemplate>
                     <DataTemplate >
                         <Border BackgroundColor="{StaticResource BgCard}"
@@ -30,8 +55,28 @@
                                 StrokeShape="RoundRectangle 10"
                                 Padding="16">
                             
+                            <Grid ColumnDefinitions="28, *, 28">
+                                <Label Grid.Column="1"
+                                       Text="Standort"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       VerticalOptions="Center"/>
+                                
+                                <Button Grid.Column="2"
+                                        Text="🗑️"
+                                        BackgroundColor="Transparent"
+                                        IsVisible="{Binding IsEditMode}"/>
+                                
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource 
+                                                                    AncestorType={x:Type ContentPage}},
+                                                                    Path=BindingContext.TapItemCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
                         </Border>
-                        
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 
@@ -39,7 +84,7 @@
                     <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center"
                                          Spacing="12" Margin="0,60,0,0">
                         <Label Text="⚡" FontSize="48" HorizontalOptions="Center"/>
-                        <Label Text="KEINE STANDORTE GEFUNDEN"
+                        <Label Text="KEINE STANDORTE VORHANDEN"
                                Style="{StaticResource MonoLabel}"
                                HorizontalOptions="Center"/>
                         <Label Text="Lege einen Standort an."
@@ -50,13 +95,22 @@
             </CollectionView>
             
         </VerticalStackLayout>
+        
         <VerticalStackLayout Grid.Row="3">
             <Entry Style="{StaticResource TechEntry}"
                    Placeholder="neuen Standort eingeben..."
-                   Margin="24,16,24,32"/>
+                   Margin="24,16,24,32"
+                   Text="{Binding SelectedLocation.Name}"/>
         
             <Button Text="Standort anlegen"
                     Style="{StaticResource PrimaryButton}"
+                    Margin="24,16,24,32"
+                    IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"/>
+            
+            <Button Text="Änderungen speichern"
+                    IsVisible="{Binding IsEditMode}"
+                    Style="{StaticResource PrimaryButton}"
+                    BackgroundColor="{StaticResource AccentSkyBlue}"
                     Margin="24,16,24,32"/>
         </VerticalStackLayout>
         

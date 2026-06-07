@@ -71,7 +71,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="MVVM\Converter\" />
       <Folder Include="MVVM\Service\" />
     </ItemGroup>
 

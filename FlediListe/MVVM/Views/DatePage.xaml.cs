@@ -12,4 +12,6 @@ public partial class DatePage : ContentPage
     {
         InitializeComponent();
     }
+    
+    
 }
