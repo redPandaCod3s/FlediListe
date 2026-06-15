@@ -57,7 +57,7 @@ public class RelayCommand<T> : ICommand
 public class AsyncRelayCommand : ICommand
 {
     private readonly Func<Task> _execute;
-    private readonly Func<bool> _canExecute;
+    private readonly Func<bool>? _canExecute;
     private bool _isRunning;
 
     public AsyncRelayCommand(Func<Task> execute, Func<bool>? canExecute = null)
@@ -97,7 +97,7 @@ public class AsyncRelayCommand : ICommand
 public class AsyncRelayCommand<T> : ICommand
 {
     private readonly Func<T?, Task> _execute;
-    private readonly Func<T?, bool> _canExecute;
+    private readonly Func<T?, bool>? _canExecute;
     private bool _isRunning;
 
     public AsyncRelayCommand(Func<T?, Task> execute, Func<T?, bool>? canExecute = null)

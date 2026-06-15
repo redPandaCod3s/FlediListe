@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FlediListe.MVVM.Service;
+using FlediListe.MVVM.ViewModels;
+using FlediListe.MVVM.Views;
+using Microsoft.Extensions.Logging;
 
 namespace FlediListe;
 
@@ -15,7 +18,22 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("RobotoMono-Regular.ttf", "RobotoMono");
             });
-
+        
+        // Services
+        builder.Services.AddSingleton<ILocationService, DummyLocationService>();
+        
+        // ViewModels
+        builder.Services.AddSingleton<MainViewModel>();
+        builder.Services.AddSingleton<LocationViewModel>();
+        builder.Services.AddTransient<DatePageViewModel>();
+        builder.Services.AddTransient<DateDetailViewModel>();
+        
+        // Pages
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<LocationPage>();
+        builder.Services.AddTransient<DatePage>();
+        builder.Services.AddTransient<DateDetailPage>();
+        
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

@@ -3,6 +3,7 @@ namespace FlediListe.MVVM.Models;
 public class FileEntry
 {
     public Guid Id { get; set;} = Guid.NewGuid();
+    public Guid LocationDateId { get; set; }
     public int FileNumber { get; set; }
     public string? Individual { get; set; }
     public string? FileComment { get; set; }     // soll Vorschläge enthalten aufgrund Eingaben

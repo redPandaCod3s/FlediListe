@@ -10,15 +10,15 @@ namespace FlediListe.MVVM.Views;
 public partial class LocationPage : ContentPage
 {
     private readonly LocationViewModel _viewModel;
-    public LocationPage()
+    public LocationPage(LocationViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = _viewModel = new LocationViewModel();
+        BindingContext = _viewModel = viewModel;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        base.OnAppearing();
-        _viewModel.Refresh();
+        await _viewModel.InitializeAsync();
+        base.OnNavigatedTo(args);
     }
 }

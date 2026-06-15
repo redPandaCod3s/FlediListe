@@ -2,8 +2,123 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FlediListe.MVVM.Views.DatePage">
-    <ContentPage.Content>
+             x:Class="FlediListe.MVVM.Views.DatePage"
+             xmlns:converter="clr-namespace:FlediListe.MVVM.Converter"
+             BackgroundColor="{StaticResource BgDeep}">
+    
+    <ContentPage.Resources>
+        <converter:InvertedBoolConverter x:Key="InverseBoolConverter"/>
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="Auto, Auto, *, Auto">
         
-    </ContentPage.Content>
+        <!-- Row:0 Buttons -->
+        <HorizontalStackLayout>
+            
+            <Button Text="zurück"
+                    Style="{StaticResource SecondaryButton}"
+                    Margin="24,16,24,16"
+                    IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
+                    Command="{Binding ReturnToLocationPage}"/>
+            
+            <Button Text="Bearbeiten"
+                    Style="{StaticResource SecondaryButton}"
+                    BorderColor="{StaticResource AccentSkyBlue}"
+                    TextColor="{StaticResource AccentSkyBlue}"
+                    IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
+                    Command="{Binding SetEditingMode}"/>
+            
+            <Button Text="Bearbeiten beenden"
+                    Style="{StaticResource SecondaryButton}"
+                    IsVisible="{Binding IsEditMode}"
+                    Command="{Binding SetEditingMode}"/>
+        </HorizontalStackLayout>
+        
+        <!-- Row 1: Header -->
+        <Label Grid.Row="1"
+               Text="Termine" 
+               Style="{StaticResource HeadingLarge}" 
+               Margin="24,16,24,32"/>
+            
+            
+        <!-- Row 2: Termin-Liste -->
+        <CollectionView Grid.Row="2"
+                        Margin="24,8,24,0"
+                        SelectionMode="None"
+                        ItemsSource="{Binding LocationDates}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate >
+                    <Border BackgroundColor="{StaticResource BgCard}"
+                            StrokeThickness="1"
+                            Stroke="{StaticResource BorderSubtle}"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="16"
+                            Margin="0,0,0,8">
+                        
+                        <Grid ColumnDefinitions="*, Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="{Binding LocDate}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource TextPrimary}"/>
+                            
+                                <Label Text="{Binding Colony}"
+                                       FontSize="13"
+                                       TextColor="{StaticResource TextMuted}"/>
+                            </VerticalStackLayout>
+                            
+                            <Button Grid.Column="1"
+                                    Text="🗑️"
+                                    BackgroundColor="Transparent"
+                                    IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                                Path=BindingContext.IsEditMode}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                    Path=BindingContext.DeleteDate}"
+                                    CommandParameter="{Binding .}"/>
+                        </Grid>
+                        
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                            Path=BindingContext.TapItemCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+                
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center"
+                                     Spacing="12" Margin="0,60,0,0">
+                    <Label Text="⚡" FontSize="48" HorizontalOptions="Center"/>
+                    <Label Text="KEINE TERMINE VORHANDEN"
+                           Style="{StaticResource MonoLabel}"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Lege einen Termin an."
+                           Style="{StaticResource BodyText}"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+        
+        
+        <VerticalStackLayout Grid.Row="3" Padding="24,16,24,32" Spacing="8">
+            
+            <Button Text="+ neuen Termin anlegen"
+                    Style="{StaticResource PrimaryButton}"
+                    Margin="24,16,24,32"
+                    IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
+                    Command="{Binding SaveNewDate}"/>
+            
+            <Button Text="Änderungen speichern"
+                    IsVisible="{Binding IsEditMode}"
+                    Style="{StaticResource PrimaryButton}"
+                    BackgroundColor="{StaticResource AccentSkyBlue}"
+                    Command="{Binding UpdateDate}"/>
+            
+        </VerticalStackLayout>
+        
+    </Grid>
+    
 </ContentPage>

@@ -1,6 +1,118 @@
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using FlediListe.MVVM.Commands;
+using FlediListe.MVVM.Models;
+using FlediListe.MVVM.Service;
+using FlediListe.MVVM.Views;
+
 namespace FlediListe.MVVM.ViewModels;
 
+[QueryProperty(nameof(LocationId),"locationId")]
 public class DatePageViewModel : ViewModelBase
 {
+    private readonly ILocationDateService _locationDateService;
+
+    private string _locationId;
+    public string LocationId
+    {
+        get => _locationId;
+        set => SetProperty(ref _locationId, value, async () => await InitializeAsync());
+    }
+
+    private LocationDate _selectedLocationDate;
+    public LocationDate? SelectedLocationDate
+    {
+        get => _selectedLocationDate;
+        set => SetProperty(ref _selectedLocationDate, value);
+    }
+
+    private bool _isEditMode;
+
+    public bool IsEditMode
+    {
+        get => _isEditMode;
+        set => SetProperty(ref _isEditMode, value);
+    }
+
+    public ObservableCollection<LocationDate> LocationDates { get; } = new();
+    public ICommand ReturnToLocationPage { get; }
+    public ICommand SetEditingMode { get; }
+    public ICommand SaveNewDate { get; }
+    public ICommand DeleteDate { get; }
+    public ICommand UpdateDate { get; }
+    public ICommand TapItemCommand { get; }
+
+    public DatePageViewModel(ILocationDateService locationDateService)
+    {
+        _locationDateService = locationDateService;
+
+        ReturnToLocationPage = new AsyncRelayCommand(NavigateToLocationPage);
+        SetEditingMode = new RelayCommand(() => IsEditMode = !IsEditMode);
+        SaveNewDate = new AsyncRelayCommand(SaveNewDateAsync);
+        DeleteDate = new AsyncRelayCommand<LocationDate>(DeleteDateAsync);
+        UpdateDate = new AsyncRelayCommand(UpdateDateAsync);
+        TapItemCommand = new RelayCommand<LocationDate>(HandleSelection);
+    }
+
+    private void HandleSelection(LocationDate? locationDate)
+    {
+        SelectedLocationDate = locationDate;
+        if (!IsEditMode)
+        {
+            NavigateToDateDetail();
+        }
+    }
+
+    private Task NavigateToDateDetail()
+    {
+        if(SelectedLocationDate is null) return Task.CompletedTask;
+        return Shell.Current.GoToAsync($"{nameof(DateDetailPage)}?locationDateId={SelectedLocationDate.Id}");
+    }
+
+    private async Task SaveNewDateAsync()
+    {
+        await _locationDateService.SaveAsync(new LocationDate()
+        {
+            Id = Guid.NewGuid(),
+            LocationId = Guid.Parse(LocationId),
+            LocDate = DateOnly.FromDateTime(DateTime.Now),
+            TimeStamp = DateTime.Now
+        });
+
+        await InitializeAsync();
+    }
+
+    private async Task DeleteDateAsync(LocationDate? locationDate)
+    {
+        if (locationDate is null) return;
+        await _locationDateService.DeleteAsync(locationDate);
+        await InitializeAsync();
+    }
+
+    private async Task UpdateDateAsync()
+    {
+        if (SelectedLocationDate is null) return;
+        await _locationDateService.SaveAsync(SelectedLocationDate);
+        await InitializeAsync();
+    }
+
+    private Task NavigateToLocationPage()
+    {
+        return Shell.Current.GoToAsync("//LocationPage");
+    }
+
+    public async Task InitializeAsync()
+    {
+        if (string.IsNullOrWhiteSpace(LocationId)) return;
+        
+        var locationDates = await _locationDateService.GetByLocationIdAsync(Guid.Parse(LocationId));
+        LocationDates.Clear();
+        foreach (var locationDate in locationDates)
+        {
+            LocationDates.Add(locationDate);
+        }
+        
+        SelectedLocationDate = LocationDates.FirstOrDefault();
+    }
     
 }

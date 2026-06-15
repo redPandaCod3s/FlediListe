@@ -13,32 +13,27 @@
                    Margin="0,0,0,32"
                    FontSize="28"/>
             
-            <Grid HorizontalOptions="Fill" Margin="0,0,0,28">
-                <Border StrokeThickness="2"
-                        Stroke="{StaticResource AccentSeaGreen}"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="20"
-                        Margin="0,0,0,32">
-                    <Border.Background>
-                        <LinearGradientBrush>
+            <Border StrokeThickness="2"
+                    Stroke="{StaticResource AccentSeaGreen}"
+                    StrokeShape="RoundRectangle 8"
+                    Padding="20"
+                    Margin="0,0,0,32">
+                <Border.Background>
+                    <LinearGradientBrush>
                             <GradientStop Color="#111520" Offset="0"/>
                             <GradientStop Color="#1A2035" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <VerticalStackLayout Spacing="12">
-                        <Label Text="Anja's Fledermaus-Daten"
-                               FontSize="22"
-                               FontAttributes="Bold"
-                               TextColor="{StaticResource AccentSkyBlue}"
-                               HorizontalOptions="Start"/>
-                        <Label Text="In dieser App werden folgende Daten erfasst: 
-                                            &#10; &#x2022; Anlegen von Standorten 
-                                            &#10; &#x2022; Anlegen von Terminen innerhalb der Standorte
-                                            &#10; &#x2022; Kommentare zu den Video-Files"
-                               Style="{StaticResource BodyText}"/>
-                    </VerticalStackLayout>
-                </Border>
-            </Grid>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Sacco Fledermaus-Daten"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource AccentSkyBlue}"
+                           HorizontalOptions="Start"/>
+                    <Label Text="In dieser App werden folgende Daten erfasst: &#10; &#x2022; Anlegen von Standorten &#10; &#x2022; Anlegen von Terminen innerhalb der Standorte&#10; &#x2022; Kommentare zu den Audio- und Video-Files"
+                           Style="{StaticResource BodyText}"/>
+                </VerticalStackLayout>
+            </Border>
             
             <Label Text="Standorte antippen, um zu den Standorten zu gelangen"
                    Style="{StaticResource MonoLabel}"/>
@@ -55,14 +50,17 @@
                     <Label Text="Standorte"
                            FontSize="10"
                            TextColor="{StaticResource TextMuted}"/>
-                    <Label Text="1"
+                    <Label Text="{Binding LocationsCount}"
                            FontSize="28"
                            FontAttributes="Bold"
                            TextColor="{StaticResource AccentSeaGreen}"/>
                 </VerticalStackLayout>
             </Border>
             
+            
+            
         </VerticalStackLayout>
+        
     </ScrollView>
 
 </ContentPage>

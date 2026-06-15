@@ -1,17 +1,19 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using FlediListe.MVVM.Commands;
+using FlediListe.MVVM.Service;
 using FlediListe.MVVM.Views;
+using Location = FlediListe.MVVM.Models.Location;
 
 
 namespace FlediListe.MVVM.ViewModels;
 
 public class LocationViewModel : ViewModelBase
 {
+    private readonly ILocationService _locationService;
     
-    
-    private Location? _selectedLocation;
-    public Location? SelectedLocation
+    private Models.Location _selectedLocation;
+    public Models.Location? SelectedLocation
     {
         get => _selectedLocation;
         set => SetProperty(ref _selectedLocation, value);
@@ -37,19 +39,19 @@ public class LocationViewModel : ViewModelBase
     public ICommand SetEditingMode { get; }
     public ICommand SaveNewLocation { get; }
     public ICommand DeleteLocation { get; }
-    public ICommand SaveLocation { get; }
+    public ICommand UpdateLocation { get; }
     public ICommand TapItemCommand { get; }
     
-    public LocationViewModel()
+    public LocationViewModel(ILocationService locationService)
     {
         
-        //_service = service;
+        _locationService = locationService ;
         
         ReturnToMainPage = new AsyncRelayCommand(NavigateToMainPage);
         SetEditingMode = new RelayCommand(EditingMode);
         SaveNewLocation = new AsyncRelayCommand<Location>(SaveNewLocationAsync);
         DeleteLocation = new AsyncRelayCommand<Location>(DeleteLocationAsync);
-        SaveLocation = new AsyncRelayCommand(SaveLocationAsync);
+        UpdateLocation = new AsyncRelayCommand(UpdateLocationAsync);
         TapItemCommand = new RelayCommand<Location>(HandleSelectionAsync);
 
     }
@@ -66,12 +68,12 @@ public class LocationViewModel : ViewModelBase
     private Task NavigateToLocation()
     {
         if(SelectedLocation is null) return Task.CompletedTask;
-        return Shell.Current.GoToAsync($"{nameof(DatePage)}?locationId={SelectedLocation}");
+        return Shell.Current.GoToAsync($"{nameof(DatePage)}?locationId={SelectedLocation.Id}");
     }
 
-    private Task SaveLocationAsync()
+    private async Task UpdateLocationAsync()
     {
-        throw new NotImplementedException();
+        
     }
 
     private Task DeleteLocationAsync(Location? arg)
@@ -79,9 +81,19 @@ public class LocationViewModel : ViewModelBase
         throw new NotImplementedException();
     }
 
-    private Task SaveNewLocationAsync(Location? arg)
+    private async Task SaveNewLocationAsync(Location? arg)
     {
-        throw new NotImplementedException();
+        if (!string.IsNullOrWhiteSpace(LocationName))
+        {
+            await _locationService.SaveAsync(new Location()
+            {
+                Id = Guid.NewGuid(),
+                Name = LocationName
+            });
+            LocationName = string.Empty;
+        }
+
+        await InitializeAsync();
     }
 
     private void EditingMode()
@@ -96,9 +108,16 @@ public class LocationViewModel : ViewModelBase
         return Shell.Current.GoToAsync("//MainPage");
     }
 
-    public void Refresh()
+    public async Task InitializeAsync()
     {
-        
+        var locations = await _locationService.GetAsync();
+        Locations.Clear();
+        foreach (var location in locations)
+        {
+            Locations.Add(location);    
+        }
+
+        SelectedLocation = Locations.FirstOrDefault();
     }
     
 }
