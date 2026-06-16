@@ -26,12 +26,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddSingleton<LocationViewModel>();
         builder.Services.AddTransient<DatePageViewModel>();
+        builder.Services.AddTransient<DateFormViewModel>();
         builder.Services.AddTransient<DateDetailViewModel>();
         
         // Pages
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<LocationPage>();
         builder.Services.AddTransient<DatePage>();
+        builder.Services.AddTransient<DateFormPage>();
         builder.Services.AddTransient<DateDetailPage>();
         
 #if DEBUG

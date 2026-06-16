@@ -67,6 +67,16 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
+[C:/Users/vvmai/RiderProjects/FlediListe/FlediListe/MVVM/Views/DateFormPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FlediListe.MVVM.Views.DateFormPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MVVM\Views\DateFormPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MVVM\Views\DateFormPage.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
 [C:/Users/vvmai/RiderProjects/FlediListe/FlediListe/MVVM/Views/DatePage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FlediListe.MVVM.Views.DatePage.xaml

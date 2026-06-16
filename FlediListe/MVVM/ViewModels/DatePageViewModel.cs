@@ -48,10 +48,15 @@ public class DatePageViewModel : ViewModelBase
 
         ReturnToLocationPage = new AsyncRelayCommand(NavigateToLocationPage);
         SetEditingMode = new RelayCommand(() => IsEditMode = !IsEditMode);
-        SaveNewDate = new AsyncRelayCommand(SaveNewDateAsync);
+        SaveNewDate = new AsyncRelayCommand(NavigateToDateForm);
         DeleteDate = new AsyncRelayCommand<LocationDate>(DeleteDateAsync);
         UpdateDate = new AsyncRelayCommand(UpdateDateAsync);
         TapItemCommand = new RelayCommand<LocationDate>(HandleSelection);
+    }
+
+    private Task NavigateToDateForm()
+    {
+        return Shell.Current.GoToAsync($"{nameof(DateFormPage)}?locationId={LocationId}");
     }
 
     private void HandleSelection(LocationDate? locationDate)
@@ -67,19 +72,6 @@ public class DatePageViewModel : ViewModelBase
     {
         if(SelectedLocationDate is null) return Task.CompletedTask;
         return Shell.Current.GoToAsync($"{nameof(DateDetailPage)}?locationDateId={SelectedLocationDate.Id}");
-    }
-
-    private async Task SaveNewDateAsync()
-    {
-        await _locationDateService.SaveAsync(new LocationDate()
-        {
-            Id = Guid.NewGuid(),
-            LocationId = Guid.Parse(LocationId),
-            LocDate = DateOnly.FromDateTime(DateTime.Now),
-            TimeStamp = DateTime.Now
-        });
-
-        await InitializeAsync();
     }
 
     private async Task DeleteDateAsync(LocationDate? locationDate)
