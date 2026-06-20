@@ -20,21 +20,27 @@ public static class MauiProgram
             });
         
         // Services
-        builder.Services.AddSingleton<ILocationService, DummyLocationService>();
+        builder.Services.AddSingleton<IFileEntryService, DummyFileEntryService>();
+        builder.Services.AddSingleton<ILocationDateService>(sp => new DummyLocationDateService(sp.GetRequiredService<IFileEntryService>()));
+        builder.Services.AddSingleton<ILocationService>(sp => new DummyLocationService(sp.GetRequiredService<ILocationDateService>()));
         
         // ViewModels
         builder.Services.AddSingleton<MainViewModel>();
         builder.Services.AddSingleton<LocationViewModel>();
+        
         builder.Services.AddTransient<DatePageViewModel>();
         builder.Services.AddTransient<DateFormViewModel>();
         builder.Services.AddTransient<DateDetailViewModel>();
+        builder.Services.AddTransient<FileEntryFormViewModel>();
         
         // Pages
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddSingleton<LocationPage>();
+        
         builder.Services.AddTransient<DatePage>();
         builder.Services.AddTransient<DateFormPage>();
         builder.Services.AddTransient<DateDetailPage>();
+        builder.Services.AddTransient<FileEntryFormPage>();
         
 #if DEBUG
         builder.Logging.AddDebug();

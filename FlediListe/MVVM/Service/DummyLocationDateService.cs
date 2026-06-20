@@ -5,6 +5,12 @@ namespace FlediListe.MVVM.Service;
 public class DummyLocationDateService : ILocationDateService
 {
     private readonly List<LocationDate> _locationDates = [];
+    private readonly IFileEntryService _fileEntryService;
+
+    public DummyLocationDateService(IFileEntryService fileEntryService)
+    {
+        _fileEntryService = fileEntryService;
+    }
     
     public Task<IEnumerable<LocationDate>> GetByLocationIdAsync(Guid locationId)
     {
@@ -42,14 +48,21 @@ public class DummyLocationDateService : ILocationDateService
         return Task.CompletedTask;
     }
 
-    public Task DeleteAsync(LocationDate locationDate)
+    public async Task DeleteAsync(LocationDate locationDate)
     {
-        var locationToDelete = _locationDates.SingleOrDefault(ld => ld.Id == locationDate.Id);
-        if (locationToDelete is not null)
+        var locationDateToDelete = _locationDates.SingleOrDefault(ld => ld.Id == locationDate.Id);
+        if (locationDateToDelete is not null)
         {
-            _locationDates.Remove(locationToDelete);
+            // zuerst alle FileEntries dieses LocationDate löschen
+            var fileEntriesToDelete = await _fileEntryService.GetByLocationDateIdAsync(locationDate.Id);
+            foreach (var fileEntry in fileEntriesToDelete)
+            {
+                await _fileEntryService.DeleteAsync(fileEntry);
+            }
+            
+            // dann das LocationDate selbst löschen
+            _locationDates.Remove(locationDateToDelete);
         }
-        return Task.CompletedTask;
     }
 
     public Task DeleteAllAsync()

@@ -59,7 +59,11 @@ public class LocationViewModel : ViewModelBase
     private void HandleSelectionAsync(Location? location)
     {
         SelectedLocation = location;
-        if (!IsEditMode)
+        if (IsEditMode)
+        {
+            LocationName = location?.Name ??  string.Empty;
+        }
+        else
         {
             NavigateToLocation();
         }
@@ -73,12 +77,38 @@ public class LocationViewModel : ViewModelBase
 
     private async Task UpdateLocationAsync()
     {
+        if(SelectedLocation is null) return;
+
+        var locationToUpdate = SelectedLocation;
         
+        //Namen aktualisieren
+        locationToUpdate.Name = LocationName;
+        
+        //Speichern
+        await _locationService.SaveAsync(locationToUpdate);
+        
+        // Liste neu laden
+        await InitializeAsync();
+        
+        // die gerade aktualisierte Location wieder auswählen und anzeigen
+        SelectedLocation = Locations.FirstOrDefault(l => l.Id ==  locationToUpdate.Id);
+        LocationName = string.Empty;
     }
 
-    private Task DeleteLocationAsync(Location? arg)
+    private async Task DeleteLocationAsync(Location? location)
     {
-        throw new NotImplementedException();
+        if (location is null) return;
+
+        bool confirm = await Shell.Current.DisplayAlert(
+            "Löschen bestätigen",
+            $"Möchtest du den Standort '{location.Name}' wirklich löschen?",
+            "Ja, löschen",
+            "Abbrechen");
+
+        if (!confirm) return;
+        
+        await _locationService.DeleteAsync(location);
+        await InitializeAsync();
     }
 
     private async Task SaveNewLocationAsync(Location? arg)
@@ -105,7 +135,7 @@ public class LocationViewModel : ViewModelBase
 
     private Task NavigateToMainPage()
     {
-        return Shell.Current.GoToAsync("//MainPage");
+        return Shell.Current.GoToAsync("..");
     }
 
     public async Task InitializeAsync()

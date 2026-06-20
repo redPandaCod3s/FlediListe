@@ -42,13 +42,14 @@
                     StrokeThickness="1"
                     Stroke="{StaticResource BorderSubtle}"
                     StrokeShape="RoundRectangle 8"
-                    Padding="16">
+                    Padding="16"
+                    Margin="0,0,0,32">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OnBorderTapped}"/>
                 </Border.GestureRecognizers>
                 <VerticalStackLayout>
                     <Label Text="Standorte"
-                           FontSize="10"
+                           FontSize="12"
                            TextColor="{StaticResource TextMuted}"/>
                     <Label Text="{Binding LocationsCount}"
                            FontSize="28"
@@ -57,6 +58,38 @@
                 </VerticalStackLayout>
             </Border>
             
+            <Border BackgroundColor="{StaticResource BgCard}"
+                    StrokeThickness="1"
+                    Stroke="{StaticResource BorderSubtle}"
+                    StrokeShape="RoundRectangle 8"
+                    Padding="20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Impressum"
+                           FontSize="12"
+                           TextColor="{StaticResource TextMuted}"/>
+                    <Label Text="Viktor Maier - IT-Beratung und Entwicklung"
+                           FontSize="14"
+                           TextColor="{StaticResource AccentSkyBlue}"/>
+                    <HorizontalStackLayout Spacing="12">
+                        <Label Text="📧" FontSize="16"/>
+                        <Label Text="viktor.maier@ikmail.com"
+                               TextColor="{StaticResource TextSecondary}"
+                               FontSize="14"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="12">
+                        <Label Text="🌐" FontSize="16"/>
+                        <Label Text="https://github.com/redPandaCod3s/FlediListe"
+                               TextColor="{StaticResource TextSecondary}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="12">
+                        <Label Text="📍" FontSize="16"/>
+                        <Label Text="DE, Flensburg"
+                               TextColor="{StaticResource TextSecondary}"
+                               FontSize="14"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+                
+            </Border>
             
             
         </VerticalStackLayout>

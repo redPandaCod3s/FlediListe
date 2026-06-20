@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FlediListe.MVVM.Views.FileEntryFormPage"
+             BackgroundColor="{StaticResource BgDeep}">
+    
+    <Grid RowDefinitions="Auto, *, Auto">
+        
+        <!-- Row 0: Header -->
+        <Label Grid.Row="0" 
+               Text="Neuer Eintrag"
+               Style="{StaticResource HeadingLarge}"
+               Margin="24,48,24,16"/>
+        
+        <!-- Row 1: Formular -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24,0,24,16" Spacing="16">
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="File"
+                           Style="{StaticResource MonoLabel}"
+                           FontSize="12"/>
+                    <Entry Style="{StaticResource TechEntry}"
+                           Placeholder="0"
+                           Keyboard="Numeric"
+                           Text="{Binding FileNumber}"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Individuum"
+                           Style="{StaticResource MonoLabel}"
+                           FontSize="12"/>
+                    <Entry Style="{StaticResource TechEntry}"
+                           Placeholder="Individuum eingeben..."
+                           Text="{Binding Individual}"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Kommentar"
+                           Style="{StaticResource MonoLabel}"
+                           FontSize="12"/>
+                    <Entry Style="{StaticResource TechEntry}"
+                           Placeholder="Kommentar eingeben..."
+                           Text="{Binding FileComment}"/>
+                </VerticalStackLayout>
+                
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding Clipping}"/>
+                    <Label Text="Übersteuert" VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Video"
+                           Style="{StaticResource MonoLabel}"
+                           FontSize="12"/>
+                    <Entry Style="{StaticResource TechEntry}"
+                           Placeholder="Video eingeben..."
+                           Text="{Binding Video}"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Video-Kommentar"
+                           Style="{StaticResource MonoLabel}"
+                           FontSize="12"/>
+                    <Entry Style="{StaticResource TechEntry}"
+                           Placeholder="Video-Kommentar eingeben..."
+                           Text="{Binding VideoComment}"/>
+                </VerticalStackLayout>
+                
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Tageszeit"
+                           Style="{StaticResource MonoLabel}"
+                           FontSize="12"/>
+                    <Entry Style="{StaticResource TechEntry}"
+                           Placeholder="Tageszeit eingeben"
+                           Text="{Binding DayTime}"/>
+                </VerticalStackLayout>
+                
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        <!-- Row 2: Buttons -->
+        <VerticalStackLayout Grid.Row="2" Padding="24,16,24,32" Spacing="8">
+            <Button Text="speichern"
+                    Style="{StaticResource PrimaryButton}"
+                    Command="{Binding SaveCommand}"/>
+            <Button Text="Abbrechen"
+                    Style="{StaticResource SecondaryButton}"
+                    Command="{Binding CancelCommand}"/>
+        </VerticalStackLayout>
+        
+    </Grid>
+    
+</ContentPage>

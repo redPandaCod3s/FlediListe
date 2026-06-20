@@ -25,20 +25,26 @@
                     Style="{StaticResource SecondaryButton}"
                     BorderColor="{StaticResource AccentSkyBlue}"
                     TextColor="{StaticResource AccentSkyBlue}"
+                    Margin="24,16,24,16"
                     IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
                     Command="{Binding SetEditingMode}"/>
             
             <Button Text="Bearbeiten beenden"
+                    Margin="24,16,24,16"
                     Style="{StaticResource SecondaryButton}"
                     IsVisible="{Binding IsEditMode}"
                     Command="{Binding SetEditingMode}"/>
         </HorizontalStackLayout>
         
         <!-- Row 1: Header -->
-        <Label Grid.Row="1"
-               Text="Termine" 
-               Style="{StaticResource HeadingLarge}" 
-               Margin="24,16,24,32"/>
+        <HorizontalStackLayout Grid.Row="1">
+            <Label Text="Termine vom Standort " 
+                   Style="{StaticResource HeadingLarge}" 
+                   Margin="24,16,0,32"/>
+            <Label Text="{Binding SelectedLocation.Name}" 
+                   Style="{StaticResource HeadingLarge}" 
+                   Margin="16,16,24,32"/>
+        </HorizontalStackLayout>
             
             
         <!-- Row 2: Termin-Liste -->
@@ -103,7 +109,7 @@
         </CollectionView>
         
         
-        <VerticalStackLayout Grid.Row="3" Padding="24,16,24,32" Spacing="8">
+        <VerticalStackLayout Grid.Row="3" Spacing="8">
             
             <Button Text="+ neuen Termin anlegen"
                     Style="{StaticResource PrimaryButton}"
@@ -113,6 +119,7 @@
             
             <Button Text="Änderungen speichern"
                     IsVisible="{Binding IsEditMode}"
+                    Margin="24,16,24,32"
                     Style="{StaticResource PrimaryButton}"
                     BackgroundColor="{StaticResource AccentSkyBlue}"
                     Command="{Binding UpdateDate}"/>

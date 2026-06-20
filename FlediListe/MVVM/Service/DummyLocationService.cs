@@ -4,7 +4,13 @@ using FlediListe.MVVM.Models;
 public class DummyLocationService : ILocationService
 {
     private readonly List<Location> _locations = [];
+    private readonly ILocationDateService _locationDateService;
 
+    public DummyLocationService(ILocationDateService locationDateService)
+    {
+        _locationDateService = locationDateService;
+    }
+    
     public Task<IEnumerable<Location>> GetAsync()
     {
         var locations = _locations.OrderBy(l => l.Name).ToList();
@@ -40,14 +46,22 @@ public class DummyLocationService : ILocationService
         return Task.CompletedTask;
     }
 
-    public Task DeleteAsync(Location location)
+    public async Task DeleteAsync(Location location)
     {
-        var locationToDelete = _locations.SingleOrDefault(l => l.Id == location.Id);
-        if (locationToDelete is not null)
+        if (_locations.Any(l => l.Id == location.Id))
         {
+            var locationToDelete = _locations.SingleOrDefault(l => l.Id == location.Id);
+            
+            // Zuerst alle LocationDates dieser Location löschen
+            var locationDatesToDelete = await _locationDateService.GetByLocationIdAsync(location.Id);
+            foreach (var locationDate in locationDatesToDelete)
+            {
+                await _locationDateService.DeleteAsync(locationDate);
+            }
+            
+            // location an sich löschen
             _locations.Remove(locationToDelete);
         }
-        return Task.CompletedTask;
     }
 
     public Task DeleteAllAsync()

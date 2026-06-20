@@ -14,7 +14,7 @@
     <Grid RowDefinitions="Auto, Auto, *, Auto">
         
         <!-- Row 0 -->
-        <HorizontalStackLayout Grid.Row="0" Spacing="12" Padding="24,16,24,16">
+        <HorizontalStackLayout Grid.Row="0" Spacing="12">
             <Button Text="zurück zur Startseite"
                     Style="{StaticResource SecondaryButton}"
                     IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
@@ -49,40 +49,43 @@
                         Margin="24,8,24,0"
                         ItemsSource="{Binding Locations}"
                         SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="6"/>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate >
-                    <Border BackgroundColor="{StaticResource BgCard}"
-                            StrokeThickness="1"
-                            Stroke="{StaticResource BorderSubtle}"
-                            StrokeShape="RoundRectangle 10"
-                            Padding="16">
-                            
-                        <Grid ColumnDefinitions="*, Auto">
-                            <Label Grid.Column="0"
-                                   Text="{Binding Name}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource TextPrimary}"
-                                   VerticalOptions="Center"/>
+                <DataTemplate>
+                        <Border BackgroundColor="{StaticResource BgCard}"
+                                StrokeThickness="1"
+                                Stroke="{StaticResource BorderSubtle}"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="16">
                                 
-                            <Button Grid.Column="1"
-                                    Text="🗑️"
-                                    BackgroundColor="Transparent"
-                                    IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
-                                                                                    Path=BindingContext.IsEditMode}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
-                                                                        Path=BindingContext.DeleteLocation}"
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0"
+                                       Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource TextPrimary}"
+                                       VerticalOptions="Center"/>
+                                    
+                                <Button Grid.Column="1"
+                                        Text="🗑️"
+                                        BackgroundColor="Transparent"
+                                        IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                                                        Path=BindingContext.IsEditMode}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}},
+                                                                            Path=BindingContext.DeleteLocation}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid>
+                            
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource 
+                                                                        AncestorType={x:Type ContentPage}},
+                                                                        Path=BindingContext.TapItemCommand}"
                                     CommandParameter="{Binding .}"/>
-                        </Grid>
-                        
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource 
-                                                                    AncestorType={x:Type ContentPage}},
-                                                                    Path=BindingContext.TapItemCommand}"
-                                CommandParameter="{Binding .}"/>
-                        </Border.GestureRecognizers>
-                    </Border>
+                            </Border.GestureRecognizers>
+                        </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             
@@ -101,7 +104,7 @@
         </CollectionView>
         
         <!-- Row 3 Eingabe -->
-        <VerticalStackLayout Grid.Row="3" Padding="24,16,24,32" Spacing="8">
+        <VerticalStackLayout Grid.Row="3" Spacing="8">
             <Entry Style="{StaticResource TechEntry}"
                    Placeholder="neuen Standort eingeben..."
                    Margin="24,16,24,32"

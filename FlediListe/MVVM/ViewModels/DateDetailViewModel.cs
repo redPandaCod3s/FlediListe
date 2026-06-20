@@ -3,6 +3,7 @@ using System.Windows.Input;
 using FlediListe.MVVM.Commands;
 using FlediListe.MVVM.Models;
 using FlediListe.MVVM.Service;
+using FlediListe.MVVM.Views;
 
 namespace FlediListe.MVVM.ViewModels;
 
@@ -104,11 +105,16 @@ public class DateDetailViewModel : ViewModelBase
 
         ReturnToDatePage = new AsyncRelayCommand(NavigateToDatePage);
         SetEditingMode = new RelayCommand(() => IsEditMode = ! IsEditMode);
-        SaveNewFileEntry = new AsyncRelayCommand(SaveNewFileEntryAsync);
+        SaveNewFileEntry = new AsyncRelayCommand(NavigateToFileEntryForm);
         DeleteFileEntry = new AsyncRelayCommand<FileEntry>(DeleteFileEntryAsync);
         UpdateFileEntry = new AsyncRelayCommand(UpdateFileEntryAsync);
         TapItemCommand = new RelayCommand<FileEntry>(HandleSelection);
 
+    }
+
+    private Task NavigateToFileEntryForm()
+    {
+        return Shell.Current.GoToAsync($"{nameof(FileEntryFormPage)}?locationDateId={LocationDateId}");
     }
 
     private void HandleSelection(FileEntry? fileEntry)
@@ -116,24 +122,7 @@ public class DateDetailViewModel : ViewModelBase
         SelectedFileEntry = fileEntry;
     }
 
-    private async Task SaveNewFileEntryAsync()
-    {
-        await _fileEntryService.SaveAsync(new FileEntry()
-        {
-            Id = Guid.NewGuid(),
-            LocationDateId = Guid.Parse(LocationDateId),
-            FileNumber = FileNumber,
-            Individual = Individual,
-            FileComment = VideoComment,
-            Clipping = Clipping,
-            Video = Video,
-            VideoComment = VideoComment,
-            DayTime = DayTime
-        });
 
-        ResetFields();
-        await InitializeAsync();
-    }
 
     private async Task DeleteFileEntryAsync(FileEntry fileEntry)
     {
