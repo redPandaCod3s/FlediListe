@@ -7,21 +7,19 @@ using FlediListe.MVVM.Views;
 
 namespace FlediListe.MVVM.ViewModels;
 
-[QueryProperty(nameof(LocationDateId), "LocationDateId")]
+[QueryProperty(nameof(LocationDateId), "locationDateId")]
 public class DateDetailViewModel : ViewModelBase
 {
     private readonly IFileEntryService _fileEntryService;
 
-    private string _locationId;
-
+    private string _locationDateId;
     public string LocationDateId
     {
-        get => _locationId;
-        set => SetProperty(ref _locationId, value, async () => await InitializeAsync());
+        get => _locationDateId;
+        set => SetProperty(ref _locationDateId, value, async () => await InitializeAsync());
     }
 
     private FileEntry? _selectedFileEntry;
-
     public FileEntry? SelectedFileEntry
     {
         get => _selectedFileEntry;
@@ -29,7 +27,6 @@ public class DateDetailViewModel : ViewModelBase
     }
 
     private bool _isEditMode;
-
     public bool IsEditMode
     {
         get => _isEditMode;
@@ -52,7 +49,6 @@ public class DateDetailViewModel : ViewModelBase
     }
     
     private string _fileComment = string.Empty;
-
     public string FileComment
     {
         get => _fileComment;
@@ -60,7 +56,6 @@ public class DateDetailViewModel : ViewModelBase
     }
 
     private bool _clipping;
-
     public bool Clipping
     {
         get => _clipping;
@@ -75,7 +70,6 @@ public class DateDetailViewModel : ViewModelBase
     }
     
     private string _videoComment = string.Empty;
-
     public string VideoComment
     {
         get => _videoComment;
@@ -83,7 +77,6 @@ public class DateDetailViewModel : ViewModelBase
     }
     
     private string _dayTime = string.Empty;
-
     public string DayTime
     {
         get => _dayTime;
@@ -101,6 +94,7 @@ public class DateDetailViewModel : ViewModelBase
 
     public DateDetailViewModel(IFileEntryService fileEntryService)
     {
+        
         _fileEntryService = fileEntryService;
 
         ReturnToDatePage = new AsyncRelayCommand(NavigateToDatePage);
@@ -121,8 +115,6 @@ public class DateDetailViewModel : ViewModelBase
     {
         SelectedFileEntry = fileEntry;
     }
-
-
 
     private async Task DeleteFileEntryAsync(FileEntry fileEntry)
     {

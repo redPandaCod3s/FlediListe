@@ -6,20 +6,27 @@ using FlediListe.MVVM.Service;
 namespace FlediListe.MVVM.ViewModels;
 
 [QueryProperty(nameof(LocationId), "locationId")]
+[QueryProperty(nameof(LocationDateId), "locationDateId")]
 public class DateFormViewModel : ViewModelBase
 {
     private readonly ILocationDateService _locationDateService;
     
     private string _locationId = string.Empty;
-
     public string LocationId
     {
         get => _locationId;
         set => SetProperty(ref _locationId, value);
     }
     
-    private DateOnly _locDate = DateOnly.FromDateTime(DateTime.Now);
+    private string _locationDateId = string.Empty;
 
+    public string LocationDateId
+    {
+        get => _locationDateId;
+        set => SetProperty(ref _locationDateId, value, async () => await InitializeAsync());
+    }
+
+    private DateOnly _locDate = DateOnly.FromDateTime(DateTime.Now);
     public DateOnly LocDate
     {
         get => _locDate;
@@ -27,7 +34,6 @@ public class DateFormViewModel : ViewModelBase
     }
     
     private string _colony = string.Empty;
-
     public string Colony
     {
         get => _colony;
@@ -66,20 +72,55 @@ public class DateFormViewModel : ViewModelBase
 
     private async Task SaveAsync()
     {
-        if (string.IsNullOrWhiteSpace(_locationId)) return;
+        if (string.IsNullOrWhiteSpace(LocationId)) return;
 
-        await _locationDateService.SaveAsync(new LocationDate()
+        LocationDate locationDate;
+
+        if (string.IsNullOrWhiteSpace(LocationDateId))
         {
-            Id = Guid.NewGuid(),
-            LocationId = Guid.Parse(_locationId),
-            LocDate = LocDate,
-            Colony = Colony,
-            NumberBats =  NumberBats,
-            NumberTutors = NumberTutors,
-            TimeStamp = DateTime.Now
-        });
+            locationDate = new LocationDate()
+            {
+                Id = Guid.NewGuid(),
+                LocationId = Guid.Parse(LocationId),
+                LocDate = LocDate,
+                Colony = Colony,
+                NumberBats = NumberBats,
+                NumberTutors = NumberTutors,
+                TimeStamp = DateTime.Now
+            };
+        }
+        else
+        {
+            locationDate = new LocationDate()
+            {
+                Id = Guid.Parse(LocationDateId),
+                LocationId = Guid.Parse(LocationId),
+                LocDate = LocDate,
+                Colony = Colony,
+                NumberBats = NumberBats,
+                NumberTutors = NumberTutors
+            };
+        }
         
+        await _locationDateService.SaveAsync(locationDate);
         await Shell.Current.GoToAsync("..");
     }
+    
+    private async Task InitializeAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(LocationDateId))
+        {
+            var locationDate = await _locationDateService.GetByIdAsync(Guid.Parse(LocationDateId));
+            if (locationDate is not null)
+            {
+                LocDate = locationDate.LocDate;
+                Colony = locationDate.Colony ?? string.Empty;
+                NumberBats = locationDate.NumberBats;
+                NumberTutors = locationDate.NumberTutors;
+            }
+        }
+    }
+    
+    
     
 }

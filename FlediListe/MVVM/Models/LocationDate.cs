@@ -47,7 +47,6 @@ public class LocationDate : NotifyPropertyChangedBase
     }
 
     private int? _numberTutors;
-
     public int? NumberTutors
     {
         get => _numberTutors; 

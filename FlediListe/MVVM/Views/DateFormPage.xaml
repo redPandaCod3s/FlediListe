@@ -16,7 +16,7 @@
         <VerticalStackLayout>
             <Label Text="Neuer Termin"
                    Style="{StaticResource HeadingLarge}"
-                   Margin="0,16,0,8"/>
+                   Margin="24,16,24,8"/>
         </VerticalStackLayout>
         
         <!-- Row 1: Formular -->

@@ -43,6 +43,7 @@ public class DatePageViewModel : ViewModelBase
     }
 
     public ObservableCollection<LocationDate> LocationDates { get; } = new();
+    
     public ICommand ReturnToLocationPage { get; }
     public ICommand SetEditingMode { get; }
     public ICommand SaveNewDate { get; }
@@ -65,16 +66,29 @@ public class DatePageViewModel : ViewModelBase
 
     private void HandleSelection(LocationDate? locationDate)
     {
+        if(locationDate is null) return;
+        
         SelectedLocationDate = locationDate;
-        if (!IsEditMode)
+        
+        if (IsEditMode)
+        {
+            NavigateToDateFormEdit(locationDate);
+        }
+        else
         {
             NavigateToDateDetail();
         }
     }
 
+    private Task NavigateToDateFormEdit(LocationDate locationDate)
+    {
+        return Shell.Current.GoToAsync($"{nameof(DateFormPage)}?locationId={LocationId}&locationDateId={locationDate.Id}");
+    }
+
     private Task NavigateToDateDetail()
     {
         if(SelectedLocationDate is null) return Task.CompletedTask;
+        
         return Shell.Current.GoToAsync($"{nameof(DateDetailPage)}?locationDateId={SelectedLocationDate.Id}");
     }
 

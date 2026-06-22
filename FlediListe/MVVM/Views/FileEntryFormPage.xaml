@@ -47,7 +47,9 @@
                 
                 <HorizontalStackLayout Spacing="8">
                     <CheckBox IsChecked="{Binding Clipping}"/>
-                    <Label Text="Übersteuert" VerticalOptions="Center"/>
+                    <Label Text="Übersteuert" 
+                           VerticalOptions="Center"
+                           Style="{StaticResource MonoLabel}"/>
                 </HorizontalStackLayout>
                 
                 <VerticalStackLayout Spacing="4">

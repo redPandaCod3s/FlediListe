@@ -52,6 +52,9 @@
                         Margin="24,8,24,0"
                         SelectionMode="None"
                         ItemsSource="{Binding LocationDates}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="4"/>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate >
                     <Border BackgroundColor="{StaticResource BgCard}"
@@ -63,14 +66,48 @@
                         
                         <Grid ColumnDefinitions="*, Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="4">
-                                <Label Text="{Binding LocDate}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource TextPrimary}"/>
-                            
-                                <Label Text="{Binding Colony}"
-                                       FontSize="13"
-                                       TextColor="{StaticResource TextMuted}"/>
+                                <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="Auto, Auto, Auto, Auto" ColumnSpacing="12">
+                                    
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                           Text="Datum"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="1" Grid.Column="0"
+                                           Text="{Binding LocDate}"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextPrimary}"/>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="Kolonie"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="1" Grid.Column="1"
+                                           Text="{Binding Colony}"
+                                           FontSize="13"
+                                           HorizontalOptions="Center"
+                                           TextColor="{StaticResource TextPrimary}"/>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="2"
+                                           Text="Fledermäuse"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="1" Grid.Column="2"
+                                           Text="{Binding NumberBats}"
+                                           FontSize="13"
+                                           HorizontalOptions="Center"
+                                           TextColor="{StaticResource TextPrimary}"/>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="3"
+                                           Text="Tutoren"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="1" Grid.Column="3"
+                                           Text="{Binding NumberTutors}"
+                                           FontSize="13"
+                                           HorizontalOptions="Center"
+                                           TextColor="{StaticResource TextPrimary}"/>
+                                </Grid>
+                                
                             </VerticalStackLayout>
                             
                             <Button Grid.Column="1"

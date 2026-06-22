@@ -60,9 +60,8 @@ public class FileEntry : NotifyPropertyChangedBase
         set => SetProperty(ref _videoComment, value);
     }    // bei den Kommentaren sollen die Vorschläge auch löschbar sein
 
-    private string? _dayTime;
-
-    public string? DayTime
+    private TimeOnly? _dayTime;
+    public TimeOnly? DayTime
     {
         get => _dayTime; 
         set  => SetProperty(ref _dayTime, value);

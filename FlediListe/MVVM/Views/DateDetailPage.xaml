@@ -7,7 +7,7 @@
              BackgroundColor="{StaticResource BgDeep}">
     
     <ContentPage.Resources>
-        <converter:DateOnlyConverter x:Key="InverseBoolConverter" />
+        <converter:InvertedBoolConverter x:Key="InverseBoolConverter" />
     </ContentPage.Resources>
     
     <Grid RowDefinitions="Auto, Auto, *, Auto">
@@ -23,11 +23,11 @@
                     Style="{StaticResource SecondaryButton}"
                     BorderColor="{StaticResource AccentSkyBlue}"
                     IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
-                    Command="{Binding SetEditMode}"/>
+                    Command="{Binding SetEditingMode}"/>
             
             <Button Text="Bearbeiten beenden"
                     Style="{StaticResource SecondaryButton}"
-                    IsVisible="{StaticResource IsEditMode}"
+                    IsVisible="{Binding IsEditMode}"
                     Command="{Binding SetEditingMode}"/>
             
         </HorizontalStackLayout>
@@ -43,6 +43,9 @@
                         Margin="24,8,24,0"
                         ItemsSource="{Binding FileEntries}"
                         SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="4"/>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border BackgroundColor="{StaticResource BgCard}"
@@ -53,18 +56,36 @@
                         
                         <Grid ColumnDefinitions="*, Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="4">
-                                <Label Text="{Binding FileNumber}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="{StaticResource TextPrimary}"/>
+                                <Grid RowDefinitions="Auto, Auto" 
+                                      ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                                      ColumnSpacing="12">
+                                    
+                                    <Label Grid.Row="0" Grid.Column="0"
+                                            Text="File"
+                                            FontSize="13"
+                                            TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="1" Grid.Column="0"
+                                           Text="{Binding FileNumber}"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextPrimary}"/>
                                 
-                                <Label Text="{Binding Individual}"
-                                       FontSize="13"
-                                       TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="0" Grid.Column="1"
+                                           Text="Individuum"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="1" Grid.Column="1"
+                                           Text="{Binding Individual}"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextPrimary}"/>
                                 
-                                <Label Text="{Binding DayTime}"
-                                       FontSize="13"
-                                       TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="0" Grid.Column="2"
+                                           Text="Ta"/>
+                                    
+                                    <Label Text="{Binding DayTime}"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextMuted}"/>
+                                    
+                                </Grid>
                             </VerticalStackLayout>
                             
                             <Button Grid.Column="1"
@@ -89,9 +110,11 @@
             <CollectionView.EmptyView>
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center"
                                      Spacing="12" Margin="0,60,0,0">
-                    <Label Text="⚡" FontSize="48" HorizontalOptions="Center"/>
+                    <Label Text="⚡" FontSize="48" 
+                           HorizontalOptions="Center"/>
                     <Label Text="KEINE EINTRÄGE VORHANDEN"
-                           Style="{StaticResource MonoLabel}"/>
+                           Style="{StaticResource MonoLabel}"
+                           HorizontalOptions="Center"/>
                     <Label Text="Lege einen Eintrag an."
                            Style="{StaticResource BodyText}"
                            HorizontalOptions="Center"/>
@@ -100,17 +123,13 @@
         </CollectionView>
         
         <!-- Row 3: Button -->
-        <VerticalStackLayout Grid.Row="3" Padding="24,16,24,32" Spacing="8">
-            <Button Text="neuen Eintrag anlegen"
-                    Style="{StaticResource PrimaryButton}"
-                    IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
-                    Command="{Binding SaveNewFileEntry}"/>
-            
-            <Button Text="Änderungen speichern"
-                    IsVisible="{Binding IsEditMode}"
-                    BackgroundColor="{StaticResource AccentSkyBlue}"
-                    Command="{Binding UpdateFileEntry}"/>
-        </VerticalStackLayout>
+        <Button Grid.Row="3"
+                Text="neuen Eintrag anlegen"
+                Margin="24,16,24,32"
+                Style="{StaticResource PrimaryButton}"
+                IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
+                Command="{Binding SaveNewFileEntry}"/>
+
     </Grid>
     
 </ContentPage>

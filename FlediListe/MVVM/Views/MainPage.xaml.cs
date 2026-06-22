@@ -20,7 +20,7 @@ public partial class MainPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        _viewModel.Refresh();
+        _viewModel.InitializeAsync();
     }
     
 }

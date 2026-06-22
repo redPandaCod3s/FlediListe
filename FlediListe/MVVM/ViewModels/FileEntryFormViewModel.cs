@@ -5,70 +5,69 @@ using FlediListe.MVVM.Service;
 
 namespace FlediListe.MVVM.ViewModels;
 
-[QueryProperty(nameof(LocationDateId), "LocationDateId")]
+[QueryProperty(nameof(LocationDateId), "locationDateId")]
 public class FileEntryFormViewModel : ViewModelBase
 {
     private readonly IFileEntryService _fileEntryService;
     
-    private string _locationDateId = string.Empty;
-
-    public string LocationDateId
+    private string? _locationDateId = string.Empty;
+    public string? LocationDateId
     {
         get => _locationDateId;
         set => SetProperty(ref _locationDateId, value);
     }
     
-    private int _fileNumber;
-    public int FileNumber
+    private int? _fileNumber;
+    public int? FileNumber
     {
         get => _fileNumber;
         set => SetProperty(ref _fileNumber, value);
     }
     
-    private string _individual = string.Empty;
-    public string Individual
+    private string? _individual = string.Empty;
+    public string? Individual
     {
         get => _individual;
         set => SetProperty(ref _individual, value);
     }
     
-    private string _fileComment = string.Empty;
-    public string FileComment
+    private string? _fileComment = string.Empty;
+    public string? FileComment
     {
         get => _fileComment;
         set => SetProperty(ref _fileComment, value);
     }
 
-    private bool _clipping;
-    public bool Clipping
+    private bool? _clipping;
+    public bool? Clipping
     {
         get => _clipping;
         set => SetProperty(ref _clipping, value);
     }
 
-    private string _video = string.Empty;
-    public string Video
+    private string? _video = string.Empty;
+    public string? Video
     {
         get => _video;
         set => SetProperty(ref _video, value);
     }
     
-    private string videoComment = string.Empty;
-    public string VideoComment
+    private string? _videoComment = string.Empty;
+    public string? VideoComment
     {
-        get => videoComment;
-        set => SetProperty(ref videoComment, value);
+        get => _videoComment;
+        set => SetProperty(ref _videoComment, value);
     }
     
-    private string _dayTime = string.Empty;
-    public string DayTime
+    private TimeOnly? _dayTime;
+    public TimeOnly? DayTime
     {
         get => _dayTime;
         set => SetProperty(ref _dayTime, value);
     }
     
-    public ICommand SaveCommand { get;}
-    public ICommand CancelCommand { get;}
+    public ICommand SaveCommand { get; }
+    public ICommand CancelCommand { get; }
 
     public FileEntryFormViewModel(IFileEntryService fileEntryService)
     {
@@ -86,7 +85,11 @@ public class FileEntryFormViewModel : ViewModelBase
 
     private async Task SaveAsync()
     {
-        if (string.IsNullOrWhiteSpace(LocationDateId)) return;
+        
+        if (string.IsNullOrWhiteSpace(LocationDateId))
+        {
+            return;
+        }
 
         await _fileEntryService.SaveAsync(new FileEntry()
         {
@@ -98,7 +101,7 @@ public class FileEntryFormViewModel : ViewModelBase
             Clipping = Clipping,
             Video = Video,
             VideoComment = VideoComment,
-            DayTime = DayTime
+            DayTime = TimeOnly.FromDateTime(DateTime.Now)
         });
         
         await Shell.Current.GoToAsync("..");
