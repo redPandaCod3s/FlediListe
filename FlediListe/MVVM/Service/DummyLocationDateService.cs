@@ -40,7 +40,8 @@ public class DummyLocationDateService : ILocationDateService
             var locationDateToUpdate = _locationDates.Single(ld => ld.Id == locationDate.Id);
             locationDateToUpdate.LocDate = locationDate.LocDate;
             locationDateToUpdate.Colony = locationDate.Colony;
-            locationDateToUpdate.TimeStamp = locationDate.TimeStamp;
+            locationDateToUpdate.StartTimeStamp = locationDate.StartTimeStamp;
+            locationDateToUpdate.EndTimeStamp = locationDate.EndTimeStamp;
             locationDateToUpdate.NumberBats= locationDate.NumberBats;
             locationDateToUpdate.NumberTutors = locationDate.NumberTutors;
         }

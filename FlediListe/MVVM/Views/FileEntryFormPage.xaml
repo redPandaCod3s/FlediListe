@@ -76,7 +76,8 @@
                            FontSize="12"/>
                     <Entry Style="{StaticResource TechEntry}"
                            Placeholder="Tageszeit eingeben"
-                           Text="{Binding DayTime}"/>
+                           Text="{Binding DayTime}"
+                           IsEnabled="False"/>
                 </VerticalStackLayout>
                 
             </VerticalStackLayout>

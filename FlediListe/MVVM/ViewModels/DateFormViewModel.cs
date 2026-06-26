@@ -19,7 +19,6 @@ public class DateFormViewModel : ViewModelBase
     }
     
     private string _locationDateId = string.Empty;
-
     public string LocationDateId
     {
         get => _locationDateId;
@@ -86,7 +85,6 @@ public class DateFormViewModel : ViewModelBase
                 Colony = Colony,
                 NumberBats = NumberBats,
                 NumberTutors = NumberTutors,
-                TimeStamp = DateTime.Now
             };
         }
         else

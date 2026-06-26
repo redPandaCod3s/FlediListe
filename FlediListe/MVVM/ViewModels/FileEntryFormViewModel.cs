@@ -5,10 +5,18 @@ using FlediListe.MVVM.Service;
 
 namespace FlediListe.MVVM.ViewModels;
 
+[QueryProperty(nameof(FileEntryId), "fileEntryId")]
 [QueryProperty(nameof(LocationDateId), "locationDateId")]
 public class FileEntryFormViewModel : ViewModelBase
 {
     private readonly IFileEntryService _fileEntryService;
+    
+    private string? _fileEntryId = string.Empty;
+    public string? FileEntryId
+    {
+        get => _fileEntryId;
+        set => SetProperty(ref _fileEntryId, value, async () => await InitializeAsync());
+    }
     
     private string? _locationDateId = string.Empty;
     public string? LocationDateId
@@ -105,6 +113,24 @@ public class FileEntryFormViewModel : ViewModelBase
         });
         
         await Shell.Current.GoToAsync("..");
+    }
+
+    private async Task InitializeAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(FileEntryId))
+        {
+            var fileEntry = await _fileEntryService.GetByIdAsync(Guid.Parse(FileEntryId));
+            if (fileEntry is not null)
+            {
+                FileNumber = fileEntry.FileNumber;
+                Individual = fileEntry.Individual;
+                FileComment = fileEntry.FileComment;
+                Clipping = fileEntry.Clipping;
+                Video = fileEntry.Video;
+                VideoComment = fileEntry.VideoComment;
+                DayTime = fileEntry.DayTime;
+            }
+        }
     }
 
 }

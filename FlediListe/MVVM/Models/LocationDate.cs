@@ -32,11 +32,18 @@ public class LocationDate : NotifyPropertyChangedBase
         set => SetProperty(ref _colony, value);
     }
     
-    private DateTime? _timeStamp;
-    public DateTime? TimeStamp
+    private DateTime? _startTimeStamp;
+    public DateTime? StartTimeStamp
     {
-        get => _timeStamp; 
-        set => SetProperty(ref _timeStamp, value);
+        get => _startTimeStamp; 
+        set => SetProperty(ref _startTimeStamp, value);
+    }
+    
+    private DateTime? _endTimeStamp;
+    public DateTime? EndTimeStamp
+    {
+        get => _endTimeStamp;
+        set => SetProperty(ref _endTimeStamp, value);
     }
 
     private int? _numberBats;

@@ -113,7 +113,19 @@ public class DateDetailViewModel : ViewModelBase
 
     private void HandleSelection(FileEntry? fileEntry)
     {
+        
+        if(fileEntry is null) return;
+        
         SelectedFileEntry = fileEntry;
+
+        NavigateToFileEntryFormEdit(fileEntry);
+        
+    }
+
+    private Task NavigateToFileEntryFormEdit(FileEntry fileEntry)
+    {
+        return Shell.Current.GoToAsync(
+            $"{nameof(FileEntryFormPage)}?locationDateId={LocationDateId}&fileEntryId={fileEntry.Id}");
     }
 
     private async Task DeleteFileEntryAsync(FileEntry fileEntry)
