@@ -73,6 +73,13 @@ public class FileEntryFormViewModel : ViewModelBase
         get => _dayTime;
         set => SetProperty(ref _dayTime, value);
     }
+
+    private bool _isEditMode;
+    public bool IsEditMode
+    {
+        get => _isEditMode;
+        set => SetProperty(ref _isEditMode, value);
+    }
     
     public ICommand SaveCommand { get; }
     public ICommand CancelCommand { get; }
@@ -119,6 +126,8 @@ public class FileEntryFormViewModel : ViewModelBase
     {
         if (!string.IsNullOrWhiteSpace(FileEntryId))
         {
+            IsEditMode = true;
+
             var fileEntry = await _fileEntryService.GetByIdAsync(Guid.Parse(FileEntryId));
             if (fileEntry is not null)
             {
@@ -131,6 +140,10 @@ public class FileEntryFormViewModel : ViewModelBase
                 DayTime = fileEntry.DayTime;
             }
         }
+        else
+        {
+            IsEditMode = false;
+        }
+        
     }
-
 }

@@ -11,10 +11,10 @@ public class DummyLocationService : ILocationService
         _locationDateService = locationDateService;
     }
     
-    public Task<IEnumerable<Location>> GetAsync()
+    public Task<IEnumerable<Location?>> GetAsync()
     {
         var locations = _locations.OrderBy(l => l.Name).ToList();
-        return Task.FromResult(locations.AsEnumerable());
+        return Task.FromResult(locations.Cast<Location?>().AsEnumerable());
     }
 
     public Task<Location?> GetByIdAsync(Guid id)
@@ -40,7 +40,10 @@ public class DummyLocationService : ILocationService
         else
         {
             var locationToUpdate = _locations.SingleOrDefault(l => l.Id == location.Id);
-            locationToUpdate.Name = location.Name;
+            if (locationToUpdate is not null)
+            {
+                locationToUpdate.Name = location.Name;
+            }
         }
         
         return Task.CompletedTask;
@@ -50,7 +53,7 @@ public class DummyLocationService : ILocationService
     {
         if (_locations.Any(l => l.Id == location.Id))
         {
-            var locationToDelete = _locations.SingleOrDefault(l => l.Id == location.Id);
+            var locationToDelete = _locations.Single(l => l.Id == location.Id);
             
             // Zuerst alle LocationDates dieser Location löschen
             var locationDatesToDelete = await _locationDateService.GetByLocationIdAsync(location.Id);

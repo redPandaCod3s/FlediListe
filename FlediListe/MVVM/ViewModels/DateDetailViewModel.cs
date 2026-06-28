@@ -11,9 +11,24 @@ namespace FlediListe.MVVM.ViewModels;
 public class DateDetailViewModel : ViewModelBase
 {
     private readonly IFileEntryService _fileEntryService;
+    private readonly  ILocationDateService _locationDateService;
+    
+    private TimeOnly? _startTimeStamp;
+    public TimeOnly? StartTimeStamp
+    {
+        get => _startTimeStamp;
+        set => SetProperty(ref _startTimeStamp, value);
+    }
+    
+    private  TimeOnly? _endTimeStamp;
+    public TimeOnly? EndTimeStamp
+    {
+        get => _endTimeStamp;
+        set => SetProperty(ref _endTimeStamp, value);
+    }
 
-    private string _locationDateId;
-    public string LocationDateId
+    private string? _locationDateId = string.Empty;
+    public string? LocationDateId
     {
         get => _locationDateId;
         set => SetProperty(ref _locationDateId, value, async () => await InitializeAsync());
@@ -91,11 +106,14 @@ public class DateDetailViewModel : ViewModelBase
     public ICommand DeleteFileEntry { get; }
     public ICommand UpdateFileEntry { get; }
     public ICommand TapItemCommand { get; }
+    public ICommand SetStartTimeStamp { get; }
+    public ICommand SetEndTimeStamp { get; }
 
-    public DateDetailViewModel(IFileEntryService fileEntryService)
+    public DateDetailViewModel(IFileEntryService fileEntryService, ILocationDateService locationDateService)
     {
         
         _fileEntryService = fileEntryService;
+        _locationDateService = locationDateService;
 
         ReturnToDatePage = new AsyncRelayCommand(NavigateToDatePage);
         SetEditingMode = new RelayCommand(() => IsEditMode = ! IsEditMode);
@@ -103,7 +121,37 @@ public class DateDetailViewModel : ViewModelBase
         DeleteFileEntry = new AsyncRelayCommand<FileEntry>(DeleteFileEntryAsync);
         UpdateFileEntry = new AsyncRelayCommand(UpdateFileEntryAsync);
         TapItemCommand = new RelayCommand<FileEntry>(HandleSelection);
+        SetStartTimeStamp = new AsyncRelayCommand(SetStartTimeStampAsync);
+        SetEndTimeStamp = new AsyncRelayCommand(SetEndTimeStampAsync);
 
+    }
+
+    private async Task SetEndTimeStampAsync()
+    {
+        if(string.IsNullOrWhiteSpace(LocationDateId)) return;
+        
+        var locationDate = await _locationDateService.GetByIdAsync(Guid.Parse(LocationDateId));
+        if (locationDate is not null)
+        {
+            var timeStamp = TimeOnly.FromDateTime(DateTime.Now);
+            locationDate.EndTimeStamp = timeStamp;
+            await _locationDateService.SaveAsync(locationDate);
+            EndTimeStamp = timeStamp;
+        }
+    }
+
+    private async Task SetStartTimeStampAsync()
+    {
+        if (string.IsNullOrWhiteSpace(LocationDateId)) return;
+        
+        var locationDate = await _locationDateService.GetByIdAsync(Guid.Parse(LocationDateId));
+        if (locationDate is not null)
+        {
+            var timeStamp = TimeOnly.FromDateTime(DateTime.Now);
+            locationDate.StartTimeStamp = timeStamp;
+            await _locationDateService.SaveAsync(locationDate);
+            StartTimeStamp = timeStamp;
+        }
     }
 
     private Task NavigateToFileEntryForm()
@@ -128,7 +176,7 @@ public class DateDetailViewModel : ViewModelBase
             $"{nameof(FileEntryFormPage)}?locationDateId={LocationDateId}&fileEntryId={fileEntry.Id}");
     }
 
-    private async Task DeleteFileEntryAsync(FileEntry fileEntry)
+    private async Task DeleteFileEntryAsync(FileEntry? fileEntry)
     {
         if (fileEntry is null) return;
         await _fileEntryService.DeleteAsync(fileEntry);
@@ -170,6 +218,13 @@ public class DateDetailViewModel : ViewModelBase
         }
         
         SelectedFileEntry = FileEntries.FirstOrDefault();
+        
+        var locationDate = await _locationDateService.GetByIdAsync(Guid.Parse(LocationDateId));
+        if (locationDate is not null)
+        {
+            StartTimeStamp = locationDate.StartTimeStamp;
+            EndTimeStamp = locationDate.EndTimeStamp;
+        }
     }
     
 }

@@ -67,7 +67,7 @@
                         <Grid ColumnDefinitions="*, Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="4">
                                 <Grid RowDefinitions="Auto, Auto" 
-                                      ColumnDefinitions="*, *, *, *" 
+                                      ColumnDefinitions="*, *, *, *, *, *" 
                                       ColumnSpacing="12"
                                       HorizontalOptions="Fill">
                                     
@@ -104,6 +104,24 @@
                                            TextColor="{StaticResource TextMuted}"/>
                                     <Label Grid.Row="1" Grid.Column="3"
                                            Text="{Binding NumberTutors}"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextPrimary}"/>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="4"
+                                           Text="Startzeit"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="1" Grid.Column="4"
+                                           Text="{Binding StartTimeStamp}"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextPrimary}"/>
+                                    
+                                    <Label Grid.Row="0" Grid.Column="5"
+                                           Text="Endzeit"
+                                           FontSize="13"
+                                           TextColor="{StaticResource TextMuted}"/>
+                                    <Label Grid.Row="1" Grid.Column="5"
+                                           Text="{Binding EndTimeStamp}"
                                            FontSize="13"
                                            TextColor="{StaticResource TextPrimary}"/>
                                 </Grid>

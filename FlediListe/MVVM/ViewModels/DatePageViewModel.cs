@@ -14,14 +14,14 @@ public class DatePageViewModel : ViewModelBase
     private readonly ILocationService _locationService;
     private readonly ILocationDateService _locationDateService;
 
-    private string _locationId;
-    public string LocationId
+    private string? _locationId = string.Empty;
+    public string? LocationId
     {
         get => _locationId;
         set => SetProperty(ref _locationId, value, async () => await InitializeAsync());
     }
 
-    private LocationDate _selectedLocationDate;
+    private LocationDate? _selectedLocationDate;
     public LocationDate? SelectedLocationDate
     {
         get => _selectedLocationDate;

@@ -41,7 +41,8 @@ public class MainViewModel: ViewModelBase
         
         foreach (var location in locations)
         {
-            Locations.Add(location);
+            if(location is not null)
+                Locations.Add(location);
         }
         
         LocationsCount = Locations.Count;

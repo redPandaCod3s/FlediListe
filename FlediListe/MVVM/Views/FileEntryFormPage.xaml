@@ -17,7 +17,8 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="24,0,24,16" Spacing="16">
                 
-                <VerticalStackLayout Spacing="4">
+                <VerticalStackLayout Spacing="4"
+                                     IsVisible="{Binding IsEditMode}">
                     <Label Text="File"
                            Style="{StaticResource MonoLabel}"
                            FontSize="12"/>
@@ -70,7 +71,7 @@
                            Text="{Binding VideoComment}"/>
                 </VerticalStackLayout>
                 
-                <VerticalStackLayout Spacing="4">
+                <VerticalStackLayout Spacing="4" IsVisible="{Binding IsEditMode}">
                     <Label Text="Tageszeit"
                            Style="{StaticResource MonoLabel}"
                            FontSize="12"/>

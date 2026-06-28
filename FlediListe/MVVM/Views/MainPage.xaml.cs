@@ -17,10 +17,9 @@ public partial class MainPage : ContentPage
         BindingContext  = _viewModel = viewModel;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        base.OnAppearing();
-        _viewModel.InitializeAsync();
+        await _viewModel.InitializeAsync();
+        base.OnNavigatedTo(args);
     }
-    
 }

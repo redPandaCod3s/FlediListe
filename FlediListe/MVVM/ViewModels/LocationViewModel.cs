@@ -12,7 +12,7 @@ public class LocationViewModel : ViewModelBase
 {
     private readonly ILocationService _locationService;
     
-    private Models.Location _selectedLocation;
+    private Models.Location? _selectedLocation;
     public Models.Location? SelectedLocation
     {
         get => _selectedLocation;
@@ -99,7 +99,7 @@ public class LocationViewModel : ViewModelBase
     {
         if (location is null) return;
 
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             "Löschen bestätigen",
             $"Möchtest du den Standort '{location.Name}' wirklich löschen?",
             "Ja, löschen",

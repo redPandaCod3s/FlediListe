@@ -5,11 +5,9 @@ namespace FlediListe.MVVM.Service;
 public class DummyFileEntryService : IFileEntryService
 {
     private readonly List<FileEntry> _fileEntries = [];
-    private readonly ILocationDateService _locationDateService;
 
-    public DummyFileEntryService(ILocationDateService locationDateService)
+    public DummyFileEntryService()
     {
-        _locationDateService = locationDateService;
     }
     
     public Task<IEnumerable<FileEntry>> GetByLocationDateIdAsync(Guid locationDateId)
@@ -33,20 +31,12 @@ public class DummyFileEntryService : IFileEntryService
 
         if (!isExistingRecord)
         {
-            _fileEntries.Add(fileEntry);
+            var maxFileNumber = _fileEntries
+                .Where(fe => fe.LocationDateId == fileEntry.LocationDateId)
+                .Max(fe => (int?)fe.FileNumber) ?? 0;
             
-            // prüfen: ist dies das erste FileEntry für diesen LocationDate?
-            var otherEntries = _fileEntries.Count(fe => fe.LocationDateId == fileEntry.LocationDateId);
-            if (otherEntries == 1)
-            {
-                // startTimeStamp setzen
-                var locationDate = await _locationDateService.GetByIdAsync(fileEntry.LocationDateId);
-                if (locationDate is not null && locationDate.StartTimeStamp == default)
-                {
-                    locationDate.StartTimeStamp = DateTime.Now;
-                    await _locationDateService.SaveAsync(locationDate);
-                }
-            }
+            fileEntry.FileNumber = maxFileNumber + 1;
+            _fileEntries.Add(fileEntry);
         }
         else
         {
@@ -59,13 +49,6 @@ public class DummyFileEntryService : IFileEntryService
             fileEntryToUpdate.VideoComment = fileEntry.VideoComment;
             fileEntryToUpdate.DayTime = fileEntry.DayTime;
             
-            // endTimeStamp setzen
-            var locationDate = await _locationDateService.GetByIdAsync(fileEntry.LocationDateId);
-            if (locationDate is not null && locationDate.EndTimeStamp == default)
-            {
-                locationDate.EndTimeStamp = DateTime.Now;
-                await _locationDateService.SaveAsync(locationDate);
-            }
         }
     }
 

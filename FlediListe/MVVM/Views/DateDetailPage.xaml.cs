@@ -18,7 +18,7 @@ public partial class DateDetailPage : ContentPage
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs e)
     {
-        _viewModel.InitializeAsync();
+        await _viewModel.InitializeAsync();
         base.OnNavigatedTo(e);
     }
     
