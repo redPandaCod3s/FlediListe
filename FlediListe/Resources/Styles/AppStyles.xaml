@@ -21,7 +21,7 @@
 
     <!-- ── STYLES: LABEL ── -->
     <Style x:Key="HeadingLarge" TargetType="Label">
-        <Setter Property="FontSize" Value="28" />
+        <Setter Property="FontSize" Value="24" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
         <Setter Property="CharacterSpacing" Value="1.5" />

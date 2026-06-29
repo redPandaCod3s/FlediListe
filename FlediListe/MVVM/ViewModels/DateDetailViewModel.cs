@@ -4,6 +4,7 @@ using FlediListe.MVVM.Commands;
 using FlediListe.MVVM.Models;
 using FlediListe.MVVM.Service;
 using FlediListe.MVVM.Views;
+using Location = FlediListe.MVVM.Models.Location;
 
 namespace FlediListe.MVVM.ViewModels;
 
@@ -12,6 +13,8 @@ public class DateDetailViewModel : ViewModelBase
 {
     private readonly IFileEntryService _fileEntryService;
     private readonly  ILocationDateService _locationDateService;
+    private readonly  IExportService _exportService;
+    private readonly ILocationService _locationService;
     
     private TimeOnly? _startTimeStamp;
     public TimeOnly? StartTimeStamp
@@ -39,6 +42,20 @@ public class DateDetailViewModel : ViewModelBase
     {
         get => _selectedFileEntry;
         set => SetProperty(ref _selectedFileEntry, value);
+    }
+    
+    private Location? _selectedLocation;
+    public Location? SelectedLocation
+    {
+        get => _selectedLocation;
+        set => SetProperty(ref _selectedLocation, value);
+    }
+    
+    private LocationDate? _selectedLocationDate;
+    public LocationDate? SelectedLocationDate
+    {
+        get => _selectedLocationDate;
+        set => SetProperty(ref _selectedLocationDate, value);
     }
 
     private bool _isEditMode;
@@ -108,12 +125,20 @@ public class DateDetailViewModel : ViewModelBase
     public ICommand TapItemCommand { get; }
     public ICommand SetStartTimeStamp { get; }
     public ICommand SetEndTimeStamp { get; }
+    public ICommand ExportCsvCommand { get; }
+    
 
-    public DateDetailViewModel(IFileEntryService fileEntryService, ILocationDateService locationDateService)
+    public DateDetailViewModel(
+        IFileEntryService fileEntryService, 
+        ILocationDateService locationDateService, 
+        IExportService exportService,
+        ILocationService locationService)
     {
         
         _fileEntryService = fileEntryService;
         _locationDateService = locationDateService;
+        _exportService = exportService;
+        _locationService = locationService;
 
         ReturnToDatePage = new AsyncRelayCommand(NavigateToDatePage);
         SetEditingMode = new RelayCommand(() => IsEditMode = ! IsEditMode);
@@ -123,7 +148,32 @@ public class DateDetailViewModel : ViewModelBase
         TapItemCommand = new RelayCommand<FileEntry>(HandleSelection);
         SetStartTimeStamp = new AsyncRelayCommand(SetStartTimeStampAsync);
         SetEndTimeStamp = new AsyncRelayCommand(SetEndTimeStampAsync);
+        ExportCsvCommand = new AsyncRelayCommand(ExportCsvAsync);
+    }
 
+    private async Task ExportCsvAsync()
+    {
+        if (!FileEntries.Any())
+        {
+            await Shell.Current.DisplayAlertAsync("Fehler", "Keine Einträge zum Exportieren", "OK");
+            return;
+        }
+
+        if (SelectedLocation is null || SelectedLocationDate is null)
+        {
+            await Shell.Current.DisplayAlertAsync("Fehler", "Standort oder Termin nicht geladen", "OK");
+        }
+
+        try
+        {
+            var filePath = await _exportService.ExportFileEntriesToCsvAsync(SelectedLocation, SelectedLocationDate, FileEntries);
+            await Shell.Current.DisplayAlertAsync("Erfolg",$"CSV exportiert: {Path.GetFileName(filePath)}", "OK");
+        }
+        catch (Exception e)
+        {
+            await Shell.Current.DisplayAlertAsync("Fehler", $"Export fehlgeschlagen: {e.Message}", "OK");
+        }
+        
     }
 
     private async Task SetEndTimeStampAsync()
@@ -165,7 +215,7 @@ public class DateDetailViewModel : ViewModelBase
         if(fileEntry is null) return;
         
         SelectedFileEntry = fileEntry;
-
+        
         NavigateToFileEntryFormEdit(fileEntry);
         
     }
@@ -210,21 +260,34 @@ public class DateDetailViewModel : ViewModelBase
     {
         if (string.IsNullOrWhiteSpace(LocationDateId)) return;
         
-        var fileEntries = await _fileEntryService.GetByLocationDateIdAsync(Guid.Parse(LocationDateId));
+        var locationDateId = Guid.Parse(LocationDateId);
+        
+        // LocationDate laden
+        var locationDate =  await _locationDateService.GetByIdAsync(locationDateId);
+        if (locationDate is not null)
+        {
+            SelectedLocationDate = locationDate;
+            StartTimeStamp = locationDate.StartTimeStamp;
+            EndTimeStamp = locationDate.EndTimeStamp;
+            
+            // Location laden 
+            SelectedLocationDate = locationDate;
+            StartTimeStamp = locationDate.StartTimeStamp;
+            EndTimeStamp = locationDate.EndTimeStamp;
+            
+            // Location laden
+            SelectedLocation = await _locationService.GetByIdAsync(locationDate.LocationId);
+        }
+        
+        // FileEntries laden
+        var fileEntries = await _fileEntryService.GetByLocationDateIdAsync(locationDateId);
         FileEntries.Clear();
         foreach (var fileEntry in fileEntries)
         {
             FileEntries.Add(fileEntry);
         }
-        
-        SelectedFileEntry = FileEntries.FirstOrDefault();
-        
-        var locationDate = await _locationDateService.GetByIdAsync(Guid.Parse(LocationDateId));
-        if (locationDate is not null)
-        {
-            StartTimeStamp = locationDate.StartTimeStamp;
-            EndTimeStamp = locationDate.EndTimeStamp;
-        }
+
+        SelectedFileEntry = fileEntries.FirstOrDefault();
     }
     
 }

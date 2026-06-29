@@ -1,4 +1,5 @@
-﻿using FlediListe.MVVM.Service;
+﻿using FlediListe.MVVM.Models;
+using FlediListe.MVVM.Service;
 using FlediListe.MVVM.ViewModels;
 using FlediListe.MVVM.Views;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<ILocationDateService, DummyLocationDateService>();
         builder.Services.AddSingleton<ILocationService>(sp => 
             new DummyLocationService(sp.GetRequiredService<ILocationDateService>()));
+        builder.Services.AddSingleton<IExportService, CsvExportService>();
         
         // ViewModels
         builder.Services.AddSingleton<MainViewModel>();
@@ -31,7 +33,14 @@ public static class MauiProgram
         
         builder.Services.AddTransient<DatePageViewModel>();
         builder.Services.AddTransient<DateFormViewModel>();
-        builder.Services.AddTransient<DateDetailViewModel>();
+        builder.Services.AddTransient<DateDetailViewModel>(sp =>
+            new DateDetailViewModel(
+                sp.GetRequiredService<IFileEntryService>(),
+                sp.GetRequiredService<ILocationDateService>(),
+                sp.GetRequiredService<IExportService>(),
+                sp.GetRequiredService<ILocationService>()
+                )
+        );
         builder.Services.AddTransient<FileEntryFormViewModel>();
         
         // Pages

@@ -28,7 +28,7 @@
         <MauiXamlInflator>SourceGen</MauiXamlInflator>
 
         <!-- Display name -->
-        <ApplicationTitle>FlediListe</ApplicationTitle>
+        <ApplicationTitle>Anjas Feldbuch</ApplicationTitle>
 
         <!-- App Identifier -->
         <ApplicationId>com.companyname.flediliste</ApplicationId>

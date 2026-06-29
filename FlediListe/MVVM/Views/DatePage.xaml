@@ -38,12 +38,14 @@
         
         <!-- Row 1: Header -->
         <HorizontalStackLayout Grid.Row="1">
-            <Label Text="Termine vom Standort " 
+            <Label Text="Termine vom " 
+                   FontSize="22"
                    Style="{StaticResource HeadingLarge}" 
                    Margin="24,16,0,32"/>
             <Label Text="{Binding SelectedLocation.Name}" 
+                   FontSize="22"
                    Style="{StaticResource HeadingLarge}" 
-                   Margin="16,16,24,32"/>
+                   Margin="0,16,24,32"/>
         </HorizontalStackLayout>
             
             
@@ -73,43 +75,43 @@
                                     
                                     <Label Grid.Row="0" Grid.Column="0"
                                            Text="Datum"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
                                     <Label Grid.Row="1" Grid.Column="0"
                                            Text="{Binding LocDate}"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
                                     
                                     <Label Grid.Row="0" Grid.Column="1"
                                            Text="Kolonie"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
                                     <Label Grid.Row="1" Grid.Column="1"
                                            Text="{Binding Colony}"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
                                     
                                     <Label Grid.Row="0" Grid.Column="2"
                                            Text="Fledermäuse"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
                                     <Label Grid.Row="1" Grid.Column="2"
                                            Text="{Binding NumberBats}"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
                                     
                                     <Label Grid.Row="0" Grid.Column="3"
                                            Text="Tutoren"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
                                     <Label Grid.Row="1" Grid.Column="3"
                                            Text="{Binding NumberTutors}"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
                                     
                                     <Label Grid.Row="0" Grid.Column="4"
                                            Text="Startzeit"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
                                     <Label Grid.Row="1" Grid.Column="4"
                                            Text="{Binding StartTimeStamp}"
@@ -118,11 +120,11 @@
                                     
                                     <Label Grid.Row="0" Grid.Column="5"
                                            Text="Endzeit"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
                                     <Label Grid.Row="1" Grid.Column="5"
                                            Text="{Binding EndTimeStamp}"
-                                           FontSize="13"
+                                           FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
                                 </Grid>
                                 
