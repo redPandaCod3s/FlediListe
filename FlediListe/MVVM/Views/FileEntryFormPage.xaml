@@ -75,8 +75,8 @@
                            Text="{Binding VideoComment}"/>
                 </VerticalStackLayout>
                 
-                <VerticalStackLayout Spacing="4" IsVisible="{Binding IsEditMode}">
-                    <Label Text="Uhrzeit"
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Uhrzeit (wird automatisch gesetzt)"
                            Style="{StaticResource MonoLabel}"
                            FontSize="12"/>
                     <TimePicker Time="{Binding DayTime, Converter={StaticResource TimeOnlyConverter}}"

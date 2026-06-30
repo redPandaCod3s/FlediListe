@@ -37,13 +37,18 @@ public class SqliteFileEntryService : IFileEntryService
 
         if (existing is null)
         {
-            // neue FileEntry - FileNumber automatisch erhöhen
-            var maxFileNumber = await db.Table<FileEntry>()
-                .Where(fe => fe.LocationDateId == fileEntry.LocationDateId)
-                .OrderByDescending(fe => fe.FileNumber)
-                .FirstOrDefaultAsync();
+            // nur automatisch setzen wenn keine FileNumber eingegeben wurde
+            if (fileEntry.FileNumber is null or 0)
+            {
+                // neue FileEntry - FileNumber automatisch erhöhen
+                var maxFileNumber = await db.Table<FileEntry>()
+                    .Where(fe => fe.LocationDateId == fileEntry.LocationDateId)
+                    .OrderByDescending(fe => fe.FileNumber)
+                    .FirstOrDefaultAsync();
             
-            fileEntry.FileNumber = (maxFileNumber?.FileNumber ?? 0) + 1;
+                fileEntry.FileNumber = (maxFileNumber?.FileNumber ?? 0) + 1;
+            }
+            
             await db.InsertAsync(fileEntry);
         }
         else

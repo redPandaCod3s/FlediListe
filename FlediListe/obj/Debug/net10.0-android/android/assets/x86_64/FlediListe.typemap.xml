@@ -1,4 +1,4 @@
-<api type="debug" assembly-name="FlediListe" mvid="6e1060c7e957419d87423cae1fccc636">
+<api type="debug" assembly-name="FlediListe" mvid="0c36bd72eef74b0eac26484406048d79">
   <java-to-managed>
     <entry java-name="crc644a83db2ae2a903df/MainActivity" managed-name="FlediListe.MainActivity, FlediListe" managed-type-token-id="33554442" />
     <entry java-name="crc644a83db2ae2a903df/MainApplication" managed-name="FlediListe.MainApplication, FlediListe" managed-type-token-id="33554443" />

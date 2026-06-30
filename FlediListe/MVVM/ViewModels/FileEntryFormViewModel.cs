@@ -141,7 +141,6 @@ public class FileEntryFormViewModel : ViewModelBase
         }
         else
         {
-
             if (!string.IsNullOrWhiteSpace(LocationDateId))
             {
                 FileNumber = await _fileEntryService.GetNextFileNumberAsync(Guid.Parse(LocationDateId));

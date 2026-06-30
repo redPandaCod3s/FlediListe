@@ -16,6 +16,8 @@ public class DatabaseService
 
     private async Task IntializeAsync()
     {
+        if (_connection is not null) return;
+        
         _connection = new SQLiteAsyncConnection(_dbPath);
         
         // Tabellen erstellen

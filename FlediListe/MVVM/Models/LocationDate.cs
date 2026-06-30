@@ -50,7 +50,6 @@ public class LocationDate : NotifyPropertyChangedBase
     }
     
     private string? _startTimeStampString;
-
     public string? StartTimeStampString
     {
         get => _startTimeStampString;
@@ -65,12 +64,11 @@ public class LocationDate : NotifyPropertyChangedBase
     [Ignore]
     public TimeOnly? StartTimeStamp
     {
-        get => _startTimeStamp; 
-        set => SetProperty(ref _startTimeStamp, value);
+        get => TimeOnly.TryParse(_startTimeStampString, out var time) ? time : null; 
+        set => StartTimeStampString = value?.ToString("HH:mm:ss");
     }
     
     private string? _endTimeStampString;
-
     public string? EndTimeStampString
     {
         get => _endTimeStampString;
@@ -85,8 +83,8 @@ public class LocationDate : NotifyPropertyChangedBase
     [Ignore]
     public TimeOnly? EndTimeStamp
     {
-        get => _endTimeStamp;
-        set => SetProperty(ref _endTimeStamp, value);
+        get => TimeOnly.TryParse(_endTimeStampString, out var time) ? time : null;
+        set => EndTimeStampString = value?.ToString("HH:mm:ss");
     }
 
     private int? _numberBats;
