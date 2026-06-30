@@ -1,10 +1,13 @@
 using FlediListe.MVVM.Helper;
+using SQLite;
 
 namespace FlediListe.MVVM.Models;
 
+[Table("FileEntries")]
 public class FileEntry : NotifyPropertyChangedBase
 {
     private Guid _id = Guid.NewGuid();
+    [PrimaryKey]
     public Guid Id
     {
         get => _id; 
@@ -59,12 +62,26 @@ public class FileEntry : NotifyPropertyChangedBase
         get => _videoComment; 
         set => SetProperty(ref _videoComment, value);
     }    // bei den Kommentaren sollen die Vorschläge auch löschbar sein
+    
+    // SQLite speichert als string
+    private string? _dayTimeString;
+
+    public string? DayTimeString
+    {
+        get => _dayTimeString;
+        set
+        {
+            _dayTimeString = value;
+            OnPropertyChanged(nameof(DayTime));
+        }
+    }
 
     private TimeOnly? _dayTime;
+    [Ignore]
     public TimeOnly? DayTime
     {
-        get => _dayTime; 
-        set  => SetProperty(ref _dayTime, value);
+        get => TimeOnly.TryParse(DayTimeString, out var time) ? time : null;
+        set  => DayTimeString = value?.ToString("HH:mm:ss");
     }
     
 }

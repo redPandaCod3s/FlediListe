@@ -62,6 +62,15 @@ public class DummyFileEntryService : IFileEntryService
         return Task.CompletedTask;
     }
 
+    public Task<int> GetNextFileNumberAsync(Guid locationDateId)
+    {
+        var maxFileNumber = _fileEntries
+            .Where(fe => fe.LocationDateId == locationDateId)
+            .Max(fe => (int?)fe.FileNumber) ?? 0;
+        
+        return Task.FromResult(maxFileNumber + 1);
+    }
+
     public Task DeleteAllAsync()
     {
         _fileEntries.Clear();

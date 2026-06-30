@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "r395tc9q/gI=",
+  "dgSpecHash": "E21hkyy6+d4=",
   "success": true,
   "projectFilePath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
   "expectedPackageFiles": [
@@ -32,6 +32,14 @@
     "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.web.webview2\\1.0.3179.45\\microsoft.web.webview2.1.0.3179.45.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.22621.756\\microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.windowsappsdk\\1.7.250909003\\microsoft.windowsappsdk.1.7.250909003.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\sqlite-net-pcl\\1.9.172\\sqlite-net-pcl.1.9.172.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.1.2\\sqlitepclraw.bundle_green.2.1.2.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\sqlitepclraw.core\\2.1.2\\sqlitepclraw.core.2.1.2.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.2\\sqlitepclraw.lib.e_sqlite3.2.1.2.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3.android\\2.1.2\\sqlitepclraw.lib.e_sqlite3.android.2.1.2.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.2\\sqlitepclraw.provider.e_sqlite3.2.1.2.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\sqlitepclraw.provider.sqlite3\\2.1.2\\sqlitepclraw.provider.sqlite3.2.1.2.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\system.runtime.interopservices.nfloat.internal\\6.0.1\\system.runtime.interopservices.nfloat.internal.6.0.1.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\xamarin.android.glide\\4.16.0.14\\xamarin.android.glide.4.16.0.14.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\xamarin.android.glide.annotations\\4.16.0.14\\xamarin.android.glide.annotations.4.16.0.14.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\xamarin.android.glide.disklrucache\\4.16.0.14\\xamarin.android.glide.disklrucache.4.16.0.14.nupkg.sha512",
@@ -126,5 +134,46 @@
     "C:\\Users\\vvmai\\.nuget\\packages\\xamarin.kotlinx.serialization.core.jvm\\1.9.0.1\\xamarin.kotlinx.serialization.core.jvm.1.9.0.1.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
+      "projectPath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
+      "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
+      "targetGraphs": [
+        "net10.0-maccatalyst26.4",
+        "net10.0-maccatalyst26.4/android-arm64",
+        "net10.0-maccatalyst26.4/android-x64",
+        "net10.0-maccatalyst26.4/iossimulator-x64",
+        "net10.0-maccatalyst26.4/maccatalyst-x64",
+        "net10.0-maccatalyst26.4/win-x64",
+        "net10.0-windows10.0.19041",
+        "net10.0-windows10.0.19041/android-arm64",
+        "net10.0-windows10.0.19041/android-x64",
+        "net10.0-windows10.0.19041/iossimulator-x64",
+        "net10.0-windows10.0.19041/maccatalyst-x64",
+        "net10.0-windows10.0.19041/win-x64"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'SQLitePCLRaw.lib.e_sqlite3.android' 2.1.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
+      "projectPath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
+      "libraryId": "SQLitePCLRaw.lib.e_sqlite3.android",
+      "targetGraphs": [
+        "net10.0-android36.0",
+        "net10.0-android36.0/android-arm64",
+        "net10.0-android36.0/android-x64",
+        "net10.0-android36.0/iossimulator-x64",
+        "net10.0-android36.0/maccatalyst-x64",
+        "net10.0-android36.0/win-x64"
+      ]
+    }
+  ]
 }

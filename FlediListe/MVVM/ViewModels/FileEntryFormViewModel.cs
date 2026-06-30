@@ -126,23 +126,26 @@ public class FileEntryFormViewModel : ViewModelBase
     {
         if (!string.IsNullOrWhiteSpace(FileEntryId))
         {
-            IsEditMode = true;
 
             var fileEntry = await _fileEntryService.GetByIdAsync(Guid.Parse(FileEntryId));
             if (fileEntry is not null)
             {
                 FileNumber = fileEntry.FileNumber;
-                Individual = fileEntry.Individual;
-                FileComment = fileEntry.FileComment;
-                Clipping = fileEntry.Clipping;
-                Video = fileEntry.Video;
-                VideoComment = fileEntry.VideoComment;
+                Individual = fileEntry.Individual ?? string.Empty;
+                FileComment = fileEntry.FileComment ?? string.Empty;
+                Clipping = fileEntry.Clipping ?? false;
+                Video = fileEntry.Video ?? string.Empty;
+                VideoComment = fileEntry.VideoComment ?? string.Empty;
                 DayTime = fileEntry.DayTime;
             }
         }
         else
         {
-            IsEditMode = false;
+
+            if (!string.IsNullOrWhiteSpace(LocationDateId))
+            {
+                FileNumber = await _fileEntryService.GetNextFileNumberAsync(Guid.Parse(LocationDateId));
+            }
         }
         
     }

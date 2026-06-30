@@ -8,5 +8,6 @@ public interface IFileEntryService
     Task<FileEntry?> GetByIdAsync(Guid id);
     Task SaveAsync(FileEntry fileEntry);
     Task DeleteAsync(FileEntry fileEntry);
+    Task<int> GetNextFileNumberAsync(Guid locationDateId);
     Task DeleteAllAsync();
 }

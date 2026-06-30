@@ -13,7 +13,7 @@
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <permission android:name="com.companyname.flediliste.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature" />
   <uses-permission android:name="com.companyname.flediliste.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-  <application android:name="crc644a83db2ae2a903df.MainApplication" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:debuggable="true" android:extractNativeLibs="true" android:icon="@mipmap/appicon" android:label="FlediListe" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
+  <application android:name="crc644a83db2ae2a903df.MainApplication" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:debuggable="true" android:extractNativeLibs="true" android:icon="@mipmap/appicon" android:label="Anjas Feldbuch" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
     <activity android:name="crc644a83db2ae2a903df.MainActivity" android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:exported="true" android:launchMode="singleTop" android:theme="@style/Maui.SplashTheme">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

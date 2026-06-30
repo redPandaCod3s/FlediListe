@@ -1,12 +1,16 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using FlediListe.MVVM.Helper;
+using SQLite;
 
 namespace FlediListe.MVVM.Models;
 
+[Table("Locations")]
 public class Location : NotifyPropertyChangedBase
 {
+    
     private Guid _id =  Guid.NewGuid();
+    [PrimaryKey]
     public Guid Id
     {
         get => _id;

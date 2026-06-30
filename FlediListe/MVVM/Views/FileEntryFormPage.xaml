@@ -3,7 +3,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FlediListe.MVVM.Views.FileEntryFormPage"
+             xmlns:converter="using:FlediListe.MVVM.Converter"
              BackgroundColor="{StaticResource BgDeep}">
+    
+    <ContentPage.Resources>
+        <converter:TimeOnlyConverter x:Key="TimeOnlyConverter"/>
+    </ContentPage.Resources>
     
     <Grid RowDefinitions="Auto, *, Auto">
         
@@ -17,8 +22,7 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="24,0,24,16" Spacing="16">
                 
-                <VerticalStackLayout Spacing="4"
-                                     IsVisible="{Binding IsEditMode}">
+                <VerticalStackLayout Spacing="4">
                     <Label Text="File"
                            Style="{StaticResource MonoLabel}"
                            FontSize="12"/>
@@ -72,13 +76,12 @@
                 </VerticalStackLayout>
                 
                 <VerticalStackLayout Spacing="4" IsVisible="{Binding IsEditMode}">
-                    <Label Text="Tageszeit"
+                    <Label Text="Uhrzeit"
                            Style="{StaticResource MonoLabel}"
                            FontSize="12"/>
-                    <Entry Style="{StaticResource TechEntry}"
-                           Placeholder="Tageszeit eingeben"
-                           Text="{Binding DayTime}"
-                           IsEnabled="False"/>
+                    <TimePicker Time="{Binding DayTime, Converter={StaticResource TimeOnlyConverter}}"
+                                TextColor="{StaticResource TextPrimary}"
+                                BackgroundColor="{StaticResource BgCard}"/>
                 </VerticalStackLayout>
                 
             </VerticalStackLayout>
