@@ -128,7 +128,9 @@ public class DatePageViewModel : ViewModelBase
         // LocationDates laden
         var locationDates = await _locationDateService.GetByLocationIdAsync(locationId);
         LocationDates.Clear();
-        foreach (var locationDate in locationDates)
+        
+        // Absteigend sortieren - neuestes Datum zuerst
+        foreach (var locationDate in locationDates.OrderByDescending(l => l.LocDate))
         {
             LocationDates.Add(locationDate);
         }

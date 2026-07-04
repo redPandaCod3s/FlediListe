@@ -8,6 +8,7 @@
     
     <ContentPage.Resources>
         <converter:DateOnlyConverter x:Key="DateOnlyConverter"/>
+        <converter:TimeOnlyConverter x:Key="TimeOnlyConverter"/>
     </ContentPage.Resources>
     
     <Grid RowDefinitions="Auto, *, Auto">
@@ -57,9 +58,30 @@
                            FontSize="12"/>
                     <Entry Style="{StaticResource TechEntry}"
                            Placeholder="0"
-                           Keyboard="Numeric"
                            Text="{Binding NumberTutors}"/>
                 </VerticalStackLayout>
+                
+                <HorizontalStackLayout Spacing="4">
+                    <VerticalStackLayout>
+                        <Label Text="Startzeit"
+                               Style="{StaticResource MonoLabel}"
+                               FontSize="12"/>
+                        <TimePicker Time="{Binding StartTimeStamp, Converter={StaticResource TimeOnlyConverter}}"
+                                    Format="HH:mm"
+                                    TextColor="{StaticResource TextPrimary}"
+                                    BackgroundColor="{StaticResource BgCard}"/>
+                    </VerticalStackLayout>
+                    
+                    <VerticalStackLayout>
+                        <Label Text="Endzeit"
+                               Style="{StaticResource MonoLabel}"
+                               FontSize="12"/>
+                        <TimePicker Time="{Binding EndTimeStamp, Converter={StaticResource TimeOnlyConverter}}"
+                                    Format="HH:mm"
+                                    TextColor="{StaticResource TextPrimary}"
+                                    BackgroundColor="{StaticResource BgCard}"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
                 
             </VerticalStackLayout>
         </ScrollView>

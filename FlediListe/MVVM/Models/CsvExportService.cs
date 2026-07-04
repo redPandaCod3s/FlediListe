@@ -11,7 +11,7 @@ public class CsvExportService : IExportService
 
         string praefix = $"{location.Name};" +
                          $"{locationDate.Colony};{locationDate.LocDate};{locationDate.NumberTutors};{locationDate.NumberBats};"+
-                         $"{locationDate.StartTimeStamp};{locationDate.EndTimeStamp}";
+                         $"{locationDate.StartTimeStampString};{locationDate.EndTimeStampString}";
         
         var sb = new StringBuilder();
         
@@ -33,7 +33,6 @@ public class CsvExportService : IExportService
         // Datei speichern
         var fileName = $"{location.Name}_{locationDate.LocDate:yyyy-MM-dd}_Export.csv";
         
-
         string filePath;
         #if ANDROID 
             var downloadsPath = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads)

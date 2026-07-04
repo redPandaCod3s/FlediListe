@@ -173,14 +173,14 @@
                     Margin="24,16,24,32"
                     IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
                     Command="{Binding SaveNewDate}"/>
-            
+            <!-- 
             <Button Text="Änderungen speichern"
                     IsVisible="{Binding IsEditMode}"
                     Margin="24,16,24,32"
                     Style="{StaticResource PrimaryButton}"
                     BackgroundColor="{StaticResource AccentSkyBlue}"
                     Command="{Binding UpdateDate}"/>
-            
+            -->
         </VerticalStackLayout>
         
     </Grid>

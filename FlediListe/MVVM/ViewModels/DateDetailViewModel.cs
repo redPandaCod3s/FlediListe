@@ -282,7 +282,7 @@ public class DateDetailViewModel : ViewModelBase
         // FileEntries laden
         var fileEntries = await _fileEntryService.GetByLocationDateIdAsync(locationDateId);
         FileEntries.Clear();
-        foreach (var fileEntry in fileEntries)
+        foreach (var fileEntry in fileEntries.OrderByDescending(fe => fe.FileNumber))
         {
             FileEntries.Add(fileEntry);
         }

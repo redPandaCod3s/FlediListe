@@ -89,15 +89,17 @@ public class FileEntryFormViewModel : ViewModelBase
         _fileEntryService = fileEntryService;
 
         SaveCommand = new AsyncRelayCommand(SaveAsync);
-        CancelCommand = new AsyncRelayCommand(CancelAsync);
+        CancelCommand = new AsyncRelayCommand(SaveIfFilledAndNavigateBack);
 
     }
 
+    /*
     private Task CancelAsync()
     {
         return Shell.Current.GoToAsync("..");
     }
-
+    */
+    
     private async Task SaveAsync()
     {
         
@@ -106,9 +108,9 @@ public class FileEntryFormViewModel : ViewModelBase
             return;
         }
 
-        await _fileEntryService.SaveAsync(new FileEntry()
+        var fileEntry = new FileEntry()
         {
-            Id = Guid.NewGuid(),
+            Id = string.IsNullOrWhiteSpace(FileEntryId) ? Guid.NewGuid() : Guid.Parse(FileEntryId),
             LocationDateId = Guid.Parse(LocationDateId),
             FileNumber = FileNumber,
             Individual = Individual,
@@ -117,9 +119,47 @@ public class FileEntryFormViewModel : ViewModelBase
             Video = Video,
             VideoComment = VideoComment,
             DayTime = TimeOnly.FromDateTime(DateTime.Now)
-        });
+        };
+
+        await _fileEntryService.SaveAsync(fileEntry);
         
         await Shell.Current.GoToAsync("..");
+    }
+    
+    private Task CancelAsync()
+    {
+        return SaveIfFilledAndNavigateBack();
+    }
+    
+    private async Task SaveIfFilledAndNavigateBack()
+    {
+        // Prüfen ob mindestens ein relevantes Feld ausgefüllt wurde
+        bool hasContent = !string.IsNullOrWhiteSpace(Individual)
+          || !string.IsNullOrWhiteSpace(FileComment)
+          || !string.IsNullOrWhiteSpace(Video)
+          || !string.IsNullOrWhiteSpace(VideoComment)
+          || (Clipping ?? false);
+
+        if (hasContent && !string.IsNullOrWhiteSpace(LocationDateId))
+        {
+            var fileEntry = new FileEntry()
+            {
+                Id = string.IsNullOrWhiteSpace(FileEntryId) ? Guid.NewGuid() : Guid.Parse(FileEntryId),
+                LocationDateId = Guid.Parse(LocationDateId),
+                FileNumber = FileNumber,
+                Individual = Individual,
+                FileComment = FileComment,
+                Clipping = Clipping,
+                Video = Video,
+                VideoComment = VideoComment,
+                DayTime = TimeOnly.FromDateTime(DateTime.Now)
+            };
+            
+            await _fileEntryService.SaveAsync(fileEntry);
+        }
+        
+        await Shell.Current.GoToAsync("..");
+
     }
 
     private async Task InitializeAsync()

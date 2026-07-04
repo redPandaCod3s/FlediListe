@@ -94,8 +94,8 @@ public class LocationDate : NotifyPropertyChangedBase
         set => SetProperty(ref _numberBats, value);
     }
 
-    private int? _numberTutors;
-    public int? NumberTutors
+    private string? _numberTutors;
+    public string? NumberTutors
     {
         get => _numberTutors; 
         set => SetProperty(ref _numberTutors, value);

@@ -46,11 +46,25 @@ public class DateFormViewModel : ViewModelBase
         set => SetProperty(ref _numberBats, value);
     }
 
-    private int? _numberTutors;
-    public int? NumberTutors
+    private string? _numberTutors;
+    public string? NumberTutors
     {
         get => _numberTutors;
         set => SetProperty(ref _numberTutors, value);
+    }
+
+    private TimeOnly? _startTimeStamp;
+    public TimeOnly? StartTimeStamp
+    {
+        get => _startTimeStamp;
+        set => SetProperty(ref _startTimeStamp, value);
+    }
+    
+    private TimeOnly? _endTimeStamp;
+    public TimeOnly? EndTimeStamp
+    {
+        get => _endTimeStamp;
+        set => SetProperty(ref _endTimeStamp, value);
     }
 
     public ICommand SaveCommand { get; }
@@ -66,7 +80,35 @@ public class DateFormViewModel : ViewModelBase
 
     private Task CancelAsync()
     {
-        return Shell.Current.GoToAsync("..");
+        return SaveIfFilledAndNavigateBack();
+    }
+
+    private async Task SaveIfFilledAndNavigateBack()
+    {
+        // Prüfen ob mindestens ein relevantes Feld ausgefüllt wurde
+        bool hasContent = !string.IsNullOrWhiteSpace(Colony) 
+                          || NumberBats is not null
+                          || !string.IsNullOrWhiteSpace(NumberTutors)
+                          || !string.IsNullOrWhiteSpace(LocationId);
+
+        if (hasContent && !string.IsNullOrWhiteSpace(LocationId))
+        {
+            var locationDate = new LocationDate()
+            {
+                Id = Guid.NewGuid(),
+                LocationId = Guid.Parse(LocationId),
+                LocDate = LocDate,
+                Colony = Colony,
+                NumberBats = NumberBats,
+                NumberTutors = NumberTutors,
+                StartTimeStamp = StartTimeStamp,
+                EndTimeStamp = EndTimeStamp
+            };
+            
+            await _locationDateService.SaveAsync(locationDate);
+        }
+        
+        await  Shell.Current.GoToAsync("..");
     }
 
     private async Task SaveAsync()
@@ -85,6 +127,8 @@ public class DateFormViewModel : ViewModelBase
                 Colony = Colony,
                 NumberBats = NumberBats,
                 NumberTutors = NumberTutors,
+                StartTimeStamp = StartTimeStamp,
+                EndTimeStamp = EndTimeStamp
             };
         }
         else
@@ -96,7 +140,9 @@ public class DateFormViewModel : ViewModelBase
                 LocDate = LocDate,
                 Colony = Colony,
                 NumberBats = NumberBats,
-                NumberTutors = NumberTutors
+                NumberTutors = NumberTutors,
+                StartTimeStamp = StartTimeStamp,
+                EndTimeStamp = EndTimeStamp
             };
         }
         
@@ -115,6 +161,8 @@ public class DateFormViewModel : ViewModelBase
                 Colony = locationDate.Colony ?? string.Empty;
                 NumberBats = locationDate.NumberBats;
                 NumberTutors = locationDate.NumberTutors;
+                StartTimeStamp = locationDate.StartTimeStamp;
+                EndTimeStamp = locationDate.EndTimeStamp;
             }
         }
     }

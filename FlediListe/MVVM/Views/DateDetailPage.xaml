@@ -47,7 +47,7 @@
         <Label Grid.Row="1"
                Text="Einträge"
                Style="{StaticResource HeadingLarge}"
-               Margin="24,16,24,16"/>
+               Margin="24,8,24,8"/>
         
         <!-- Row 2: Liste -->
         <CollectionView Grid.Row="2"
@@ -63,13 +63,12 @@
                             StrokeThickness="1"
                             Stroke="{StaticResource BorderSubtle}"
                             StrokeShape="RoundRectangle 10"
-                            Padding="16"
-                            Margin="0,0,0,8">
+                            Padding="8">
                         
                         <Grid ColumnDefinitions="*, Auto">
                             <VerticalStackLayout Grid.Column="0" Spacing="4">
-                                <Grid RowDefinitions="Auto, Auto" 
-                                      ColumnDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                                <Grid RowDefinitions="Auto, Auto, Auto, Auto" 
+                                      ColumnDefinitions="*, *, *, *"
                                       ColumnSpacing="12"
                                       HorizontalOptions="Fill">
                                     
@@ -81,51 +80,53 @@
                                            Text="{Binding FileNumber}"
                                            FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
-                                    
-                                    <Label Grid.Row="0" Grid.Column="1"
-                                           Text="File-Komm."
-                                           FontSize="12"
-                                           TextColor="{StaticResource TextMuted}"/>
-                                    <Label Grid.Row="1" Grid.Column="1"
-                                           Text="{Binding FileComment}"
-                                           FontSize="12"
-                                           TextColor="{StaticResource TextPrimary}"/>
                                 
-                                    <Label Grid.Row="0" Grid.Column="2"
+                                    <Label Grid.Row="0" Grid.Column="1"
                                            Text="Ind."
                                            FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
-                                    <Label Grid.Row="1" Grid.Column="2"
+                                    <Label Grid.Row="1" Grid.Column="1"
                                            Text="{Binding Individual}"
                                            FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
                                 
-                                    <Label Grid.Row="0" Grid.Column="3"
+                                    <Label Grid.Row="0" Grid.Column="2"
                                            Text="ÜS"
                                            FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
-                                    <Label Grid.Row="1" Grid.Column="3"
+                                    <Label Grid.Row="1" Grid.Column="2"
                                            Text="{Binding Clipping, Converter={StaticResource BoolToYesConverter}}"
                                            FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
                                     
-                                    <Label Grid.Row="0" Grid.Column="4"
+                                    <Label Grid.Row="0" Grid.Column="3"
                                            Text="Video"
                                            FontSize="12"
                                            TextColor="{StaticResource TextMuted}"/>
-                                    <Label Grid.Row="1" Grid.Column="4" 
+                                    <Label Grid.Row="1" Grid.Column="3" 
                                            Text="{Binding Video}"
                                            FontSize="12"
                                            TextColor="{StaticResource TextPrimary}"/>
                                     
-                                    <Label Grid.Row="0" Grid.Column="5"
-                                           Text="Vi.Komm."
-                                           FontSize="12"
-                                           TextColor="{StaticResource TextMuted}"/>
-                                    <Label Grid.Row="1" Grid.Column="5" 
-                                           Text="{Binding VideoComment}"
-                                           FontSize="12"
-                                           TextColor="{StaticResource TextPrimary}"/>
+                                    <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Spacing="4">
+                                        <Label Text="File-Komm."
+                                               FontSize="12"
+                                               TextColor="{StaticResource TextMuted}"/>
+                                        <Label Text="{Binding FileComment}"
+                                               LineBreakMode="WordWrap"
+                                               FontSize="12"
+                                               TextColor="{StaticResource TextPrimary}"/>
+                                    </HorizontalStackLayout>
+                                    
+                                    <HorizontalStackLayout Grid.Row="3" Grid.Column="0"  Grid.ColumnSpan="4" Spacing="4">
+                                        <Label Text="Video-Komm."
+                                               FontSize="12"
+                                               TextColor="{StaticResource TextMuted}"/>
+                                        <Label Text="{Binding VideoComment}"
+                                               LineBreakMode="WordWrap"
+                                               FontSize="12"
+                                               TextColor="{StaticResource TextPrimary}"/>
+                                    </HorizontalStackLayout>
                                     
                                 </Grid>
                             </VerticalStackLayout>
@@ -167,39 +168,36 @@
         <!-- Row 3: Button -->
         <VerticalStackLayout Grid.Row="3" Padding="24,16,24,32" Spacing="8">
             <Button Text="neuen Eintrag anlegen"
-                    Margin="24,16,24,32"
+                    Margin="24,16,24,16"
                     Style="{StaticResource PrimaryButton}"
                     IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBoolConverter}}"
                     Command="{Binding SaveNewFileEntry}"/>
             
             <HorizontalStackLayout>
-                <VerticalStackLayout>
+                <VerticalStackLayout Margin="24,8,8,16">
                     <Button Text="⏱️ Start setzen"
-                            Margin="24,16,12,16"
+                            Margin="0,0,0,8"
                             Style="{StaticResource PrimaryButton}"
                             BorderColor="{StaticResource AccentSkyBlue}"
                             TextColor="Black"
                             Command="{Binding SetStartTimeStamp}"/>
                     
                     <Label Text="{Binding StartTimeStamp}"
-                            Margin="24,0,24,16"
                             Style="{StaticResource MonoLabel}"
                             HorizontalOptions="Center"
                             TextColor="#009acd"/>
-                    
                 </VerticalStackLayout>
                 
-                <VerticalStackLayout>
+                <VerticalStackLayout Margin="8,8,24,16">
                     <Button Text="⏱️ Ende setzen"
-                            Margin="12,16,24,16"
                             FontSize="12"
+                            Margin="0,0,0,8"
                             Style="{StaticResource PrimaryButton}"
                             BorderColor="#009acd"
                             TextColor="Black"
                             Command="{Binding SetEndTimeStamp}"/>
                     
                     <Label Text="{Binding EndTimeStamp}"
-                           Margin="24,0,24,16"
                            FontSize="12"
                            Style="{StaticResource MonoLabel}"
                            HorizontalOptions="Center"

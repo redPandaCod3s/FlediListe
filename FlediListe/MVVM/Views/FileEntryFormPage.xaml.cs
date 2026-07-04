@@ -22,6 +22,13 @@ public partial class FileEntryFormPage : ContentPage
         base.OnAppearing();
 
     }
-    
-    
+
+    protected override bool OnBackButtonPressed()
+    {
+        // CAncelCommand ausführen (fire-and-forget, da OnBackButtonPressen synchron ist)
+        _viewModel.CancelCommand.Execute(null);
+        
+        // true = übernimmt die Navigation selbst, Standard-Verhalten wird unterbunden
+        return true;
+    }
 }

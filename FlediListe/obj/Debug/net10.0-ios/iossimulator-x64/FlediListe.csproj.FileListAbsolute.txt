@@ -18,6 +18,10 @@ C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimu
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\Microsoft.Maui.dll
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\Microsoft.Maui.Essentials.dll
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\Microsoft.Maui.Graphics.dll
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\SQLite-net.dll
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\SQLitePCLRaw.batteries_v2.dll
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\SQLitePCLRaw.core.dll
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\SQLitePCLRaw.provider.sqlite3.dll
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\ar\Microsoft.Maui.Controls.resources.dll
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\ca\Microsoft.Maui.Controls.resources.dll
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\cs\Microsoft.Maui.Controls.resources.dll
@@ -293,6 +297,7 @@ C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimu
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\mauifont.stamp
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\f\OpenSans-Regular.ttf
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\f\OpenSans-Semibold.ttf
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\f\RobotoMono-Regular.ttf
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\actool\_PartialAppManifest.items
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\actool\_BundleResourceWithLogicalName.items
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\actool\_ProcessedImageAssetsPath.items
@@ -309,6 +314,7 @@ C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimu
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.AssemblyInfoInputs.cache
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.AssemblyInfo.cs
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.csproj.CoreCompileInputs.cache
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.sourcelink.json
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\XamlC.stamp
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.csproj.Up2Date
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.dll
@@ -316,9 +322,3 @@ C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimu
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.pdb
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.genruntimeconfig.cache
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\ref\FlediListe.dll
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\f\RobotoMono-Regular.ttf
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\FlediListe.sourcelink.json
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\SQLite-net.dll
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\SQLitePCLRaw.batteries_v2.dll
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\SQLitePCLRaw.core.dll
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\bin\Debug\net10.0-ios\iossimulator-x64\SQLitePCLRaw.provider.sqlite3.dll
