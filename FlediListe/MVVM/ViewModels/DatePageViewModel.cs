@@ -100,6 +100,15 @@ public class DatePageViewModel : ViewModelBase
     private async Task DeleteDateAsync(LocationDate? locationDate)
     {
         if (locationDate is null) return;
+
+        bool confirm = await Shell.Current.DisplayAlertAsync(
+            "Löschen bestätigen",
+            $"Möchtest du den Termin '{locationDate.LocDateString}' wirklich löschen?",
+            "Ja, löschen",
+            "Abbrechen");
+        
+        if (!confirm) return;
+        
         await _locationDateService.DeleteAsync(locationDate);
         await InitializeAsync();
     }

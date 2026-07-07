@@ -272,9 +272,9 @@ C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimu
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\mauisplash.inputs
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\MauiInfo.plist
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\MauiSplash.storyboard
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\splash_58C11A0A2CDF3C43117FC29EECA319E6FBFEFE150B9123BB20E86A467F499449.png
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\splash_58C11A0A2CDF3C43117FC29EECA319E6FBFEFE150B9123BB20E86A467F499449@2x.png
-C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\splash_58C11A0A2CDF3C43117FC29EECA319E6FBFEFE150B9123BB20E86A467F499449@3x.png
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\splash_19E9975373D2C115D04AB21633E1E7747F9DB5B5E81F0FD4F305921DB00ADFC7.png
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\splash_19E9975373D2C115D04AB21633E1E7747F9DB5B5E81F0FD4F305921DB00ADFC7@2x.png
+C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\splash_19E9975373D2C115D04AB21633E1E7747F9DB5B5E81F0FD4F305921DB00ADFC7@3x.png
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\mauisplash.stamp
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\dotnet_bot@3x.png
 C:\Users\vvmai\RiderProjects\FlediListe\FlediListe\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\dotnet_bot@2x.png

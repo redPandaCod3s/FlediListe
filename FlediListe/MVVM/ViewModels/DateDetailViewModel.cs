@@ -229,6 +229,14 @@ public class DateDetailViewModel : ViewModelBase
     private async Task DeleteFileEntryAsync(FileEntry? fileEntry)
     {
         if (fileEntry is null) return;
+        
+        bool confirm = await Shell.Current.DisplayAlertAsync(
+            "Löschen bestätigen",
+            "Möchtest du diesen Eintrag löschen?",
+            "Ja, löschen",
+            "Abbrechen");
+        
+        if(!confirm) return;
         await _fileEntryService.DeleteAsync(fileEntry);
         await InitializeAsync();
     }

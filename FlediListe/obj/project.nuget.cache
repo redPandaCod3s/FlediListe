@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "oEMEulowzo4=",
+  "dgSpecHash": "IO//GSoNSPE=",
   "success": true,
   "projectFilePath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
   "expectedPackageFiles": [
@@ -135,47 +135,54 @@
     "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.netcore.app.ref\\10.0.8\\microsoft.netcore.app.ref.10.0.8.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.netcore.app.ref\\10.0.8\\microsoft.netcore.app.ref.10.0.8.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.netcore.app.ref\\10.0.8\\microsoft.netcore.app.ref.10.0.8.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\10.0.9\\microsoft.netcore.app.runtime.win-x64.10.0.9.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\10.0.9\\microsoft.windowsdesktop.app.runtime.win-x64.10.0.9.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\10.0.9\\microsoft.aspnetcore.app.runtime.win-x64.10.0.9.nupkg.sha512",
+    "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\10.0.9\\microsoft.netcore.app.crossgen2.win-x64.10.0.9.nupkg.sha512",
     "C:\\Users\\vvmai\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
   ],
   "logs": [
     {
       "code": "NU1903",
       "level": "Warning",
-      "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
+      "message": "Das Paket \"SQLitePCLRaw.lib.e_sqlite3\" 2.1.2 weist eine bekannte hoch Schweregrad-Sicherheitsanfälligkeit auf, https://github.com/advisories/GHSA-2m69-gcr7-jv3q.",
       "projectPath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
-        "net10.0-maccatalyst26.4",
-        "net10.0-maccatalyst26.4/android-arm64",
-        "net10.0-maccatalyst26.4/android-x64",
-        "net10.0-maccatalyst26.4/iossimulator-x64",
-        "net10.0-maccatalyst26.4/maccatalyst-x64",
-        "net10.0-maccatalyst26.4/win-x64",
-        "net10.0-windows10.0.19041",
-        "net10.0-windows10.0.19041/android-arm64",
-        "net10.0-windows10.0.19041/android-x64",
-        "net10.0-windows10.0.19041/iossimulator-x64",
-        "net10.0-windows10.0.19041/maccatalyst-x64",
-        "net10.0-windows10.0.19041/win-x64"
+        "net10.0-maccatalyst",
+        "net10.0-maccatalyst/android-arm64",
+        "net10.0-maccatalyst/android-x64",
+        "net10.0-maccatalyst/ios-arm64",
+        "net10.0-maccatalyst/maccatalyst-arm64",
+        "net10.0-maccatalyst/maccatalyst-x64",
+        "net10.0-maccatalyst/win-x64",
+        "net10.0-windows10.0.19041.0",
+        "net10.0-windows10.0.19041.0/android-arm64",
+        "net10.0-windows10.0.19041.0/android-x64",
+        "net10.0-windows10.0.19041.0/ios-arm64",
+        "net10.0-windows10.0.19041.0/maccatalyst-arm64",
+        "net10.0-windows10.0.19041.0/maccatalyst-x64",
+        "net10.0-windows10.0.19041.0/win-x64"
       ]
     },
     {
       "code": "NU1903",
       "level": "Warning",
-      "message": "Package 'SQLitePCLRaw.lib.e_sqlite3.android' 2.1.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
+      "message": "Das Paket \"SQLitePCLRaw.lib.e_sqlite3.android\" 2.1.2 weist eine bekannte hoch Schweregrad-Sicherheitsanfälligkeit auf, https://github.com/advisories/GHSA-2m69-gcr7-jv3q.",
       "projectPath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\vvmai\\RiderProjects\\FlediListe\\FlediListe\\FlediListe.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3.android",
       "targetGraphs": [
-        "net10.0-android36.0",
-        "net10.0-android36.0/android-arm64",
-        "net10.0-android36.0/android-x64",
-        "net10.0-android36.0/iossimulator-x64",
-        "net10.0-android36.0/maccatalyst-x64",
-        "net10.0-android36.0/win-x64"
+        "net10.0-android",
+        "net10.0-android/android-arm64",
+        "net10.0-android/android-x64",
+        "net10.0-android/ios-arm64",
+        "net10.0-android/maccatalyst-arm64",
+        "net10.0-android/maccatalyst-x64",
+        "net10.0-android/win-x64"
       ]
     }
   ]
