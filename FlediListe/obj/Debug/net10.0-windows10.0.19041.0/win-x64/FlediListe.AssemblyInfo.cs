@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlediListe")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+b06cbe90f34c8652016e298be013e3a2956ff819")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+6300e4cb3c94764cf083d5c557db0d2191f622a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlediListe")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlediListe")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
