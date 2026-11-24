@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using FlediListe.Maui.MVVM.ViewModels;
+
+namespace FlediListe.Maui.MVVM.Views;
+
+public partial class FileEntryFormPage : ContentPage
+{
+    private readonly FileEntryFormViewModel _viewModel;
+    
+    public FileEntryFormPage(FileEntryFormViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = _viewModel =  viewModel;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        // CAncelCommand ausführen (fire-and-forget, da OnBackButtonPressen synchron ist)
+        _viewModel.CancelCommand.Execute(null);
+        
+        // true = übernimmt die Navigation selbst, Standard-Verhalten wird unterbunden
+        return true;
+    }
+}

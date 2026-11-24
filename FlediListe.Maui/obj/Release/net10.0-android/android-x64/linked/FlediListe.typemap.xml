@@ -1,0 +1,8 @@
+<api type="release" assembly-name="FlediListe" mvid="a66ced44a65d4b01a69bbb530932ab26">
+  <module assembly-name="FlediListe" mvid="a66ced44a65d4b01a69bbb530932ab26" mvid-bytes="RO1spl2mAUumm7tTCTKrJg==">
+    <types-scratch>
+      <entry key="crc644a83db2ae2a903df/MainActivity" java-name="crc644a83db2ae2a903df/MainActivity" managed-type-name="FlediListe.MainActivity" token="33554442" />
+      <entry key="crc644a83db2ae2a903df/MainApplication" java-name="crc644a83db2ae2a903df/MainApplication" managed-type-name="FlediListe.MainApplication" token="33554443" />
+    </types-scratch>
+  </module>
+</api>
